@@ -238,6 +238,27 @@ public abstract class TennisGameTest {
                     "| John McEnroe | 6     | 15    |\n" + //
                     "| Ivan Lendl   | 5     | 0     |\n");
         }
+
+        @Test
+        public void should_set_be_won_when_two_games_of_difference() {
+            tennisGame.getPlayer(player1).setGamesWon(8);
+            tennisGame.getPlayer(player2).setGamesWon(7);
+            tennisGame.getPlayer(player1).setScore(ADVANTAGE);
+            tennisGame.getPlayer(player2).setScore(ZERO);
+            tennisGame.scores(player1);
+
+            assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
+            assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
+            assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
+            assertThat(tennisGame.getSetsWon(player1)).isEqualTo(1);
+            assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
+            assertThat(tennisGame.getWinner()).isEqualTo(player1);
+            assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                    "| Player       | Set 1 | Result |\n" + //
+                    "| John McEnroe | 9     | WINNER |\n" + //
+                    "| Ivan Lendl   | 7     |        |\n");
+        }
     }
 
     protected static void repeat(int times, Runnable runnable) {
