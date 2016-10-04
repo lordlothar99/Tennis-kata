@@ -2,7 +2,6 @@ package com.github.lothar.katas.tennis;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class TennisGameTest {
