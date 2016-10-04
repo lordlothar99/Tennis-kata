@@ -26,4 +26,8 @@ public class Player {
     public void setScore(Score score) {
         this.score = score;
     }
+
+    public boolean hasAdvantage() {
+        return Score.ADVANTAGE.equals(score);
+    }
 }

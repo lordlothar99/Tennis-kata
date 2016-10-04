@@ -1,12 +1,12 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
 import static com.github.lothar.katas.tennis.Score.FOURTY;
 
 public class TennisGame {
 
     private Player player1;
     private Player player2;
+    private GameState state = new NormalState();
 
     public TennisGame(Player player1, Player player2) {
         this.player1 = player1;
@@ -24,25 +24,20 @@ public class TennisGame {
     }
 
     public void scores(Player player) {
-        Score score = player.getScore();
-        if (opponentHasAdvantage(player)) {
-            player1.setScore(FOURTY);
-            player2.setScore(FOURTY);
-        } else if (FOURTY.equals(score) && !isDeuce() //
-                || ADVANTAGE.equals(score)) {
-            winsGame(player);
+        state.scores(player);
+        updateState();
+    }
+
+    private void updateState() {
+        if (isDeuce()) {
+            state = new DeuceState();
+        } else if (player1.hasAdvantage()) {
+            state = new AdvantageState(player1);
+        } else if (player2.hasAdvantage()) {
+            state = new AdvantageState(player2);
         } else {
-            player.setScore(player.getScore().next());
+            state = new NormalState();
         }
-    }
-
-    private boolean opponentHasAdvantage(Player player) {
-        Player opponent = opponent(player);
-        return ADVANTAGE.equals(opponent.getScore());
-    }
-
-    private Player opponent(Player player) {
-        return player1.equals(player) ? player2 : player1;
     }
 
     private boolean isDeuce() {
@@ -50,14 +45,57 @@ public class TennisGame {
                 && FOURTY.equals(player2.getScore());
     }
 
-    private void winsGame(Player player) {
+    public int getGamesWon(Player player) {
+        return player.getGamesWon();
+    }
+
+    protected void winsGame(Player player) {
         player.incrementGamesWon();
         player1.resetScore();
         player2.resetScore();
     }
 
-    public int getGamesWon(Player player) {
-        return player.getGamesWon();
+    private interface GameState {
+        void scores(Player player);
     }
 
+    private class NormalState implements GameState {
+
+        @Override
+        public void scores(Player player) {
+            Score score = player.getScore();
+            if (FOURTY.equals(score)) {
+                winsGame(player);
+            } else {
+                player.setScore(player.getScore().next());
+            }
+        }
+    }
+
+    private class DeuceState implements GameState {
+
+        @Override
+        public void scores(Player player) {
+            player.setScore(player.getScore().next());
+        }
+    }
+
+    private class AdvantageState implements GameState {
+
+        private Player playerWithAdvantage;
+
+        public AdvantageState(Player playerWithAdvantage) {
+            this.playerWithAdvantage = playerWithAdvantage;
+        }
+
+        @Override
+        public void scores(Player player) {
+            if (playerWithAdvantage.equals(player)) {
+                winsGame(player);
+            } else {
+                player1.setScore(FOURTY);
+                player2.setScore(FOURTY);
+            }
+        }
+    }
 }
