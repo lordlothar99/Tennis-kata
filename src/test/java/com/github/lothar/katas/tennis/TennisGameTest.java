@@ -107,6 +107,20 @@ public class TennisGameTest {
         assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
     }
 
+    @Test
+    public void should_players_be_at_deuce_when_player1_had_advantage_but_player2_scores() {
+        repeat(3, () -> tennisGame.scores(player1));
+        repeat(3, () -> tennisGame.scores(player2));
+        tennisGame.scores(player1);
+        tennisGame.scores(player2);
+
+        assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTY);
+        assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTY);
+        assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
+        assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 0-0");
+    }
+
     private void repeat(int times, Runnable runnable) {
         range(0, times).forEach(i -> runnable.run());
     }
