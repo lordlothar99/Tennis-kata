@@ -175,6 +175,16 @@ public abstract class TennisGameTest {
                     "| John McEnroe | 6     | WINNER |\n" + //
                     "| Ivan Lendl   | 0     |        |\n");
         }
+
+        @Test(expected = MatchIsOverException.class)
+        public void should_referee_protest_when_players_still_play_but_match_is_over() {
+            tennisGame.getPlayer(player1).setGamesWon(5);
+            tennisGame.getPlayer(player2).setGamesWon(0);
+            tennisGame.getPlayer(player1).setScore(ADVANTAGE);
+            tennisGame.getPlayer(player2).setScore(ZERO);
+            tennisGame.scores(player1);
+            tennisGame.scores(player1);
+        }
     }
 
     public static class ThreeSets extends TennisGameTest {
