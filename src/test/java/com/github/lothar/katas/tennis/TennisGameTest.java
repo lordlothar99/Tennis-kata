@@ -74,6 +74,8 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
+        assertThat(tennisGame.getGamesWon(player1)).isEqualTo(1);
+        assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
         assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
     }
 

@@ -35,4 +35,8 @@ public class TennisGame {
         player2.resetScore();
     }
 
+    public int getGamesWon(Player player) {
+        return player.getGamesWon();
+    }
+
 }
