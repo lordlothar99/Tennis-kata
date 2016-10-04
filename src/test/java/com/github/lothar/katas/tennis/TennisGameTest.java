@@ -149,6 +149,29 @@ public class TennisGameTest {
                 "| Ivan Lendl   | 0   | 40    |\n");
     }
 
+    @Test
+    public void should_player1_win_the_set_when_he_scores_in_last_game_of_the_set() {
+        tennisGame.getPlayer(player1).setGamesWon(5);
+        tennisGame.getPlayer(player2).setGamesWon(0);
+        tennisGame.getPlayer(player1).setScore(ADVANTAGE);
+        tennisGame.getPlayer(player2).setScore(ZERO);
+        tennisGame.scores(player1);
+        tennisGame.scores(player1);
+
+        assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
+        assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
+        assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
+        assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
+        assertThat(tennisGame.getGamesWonInSet(player1, 1)).isEqualTo(6);
+        assertThat(tennisGame.getGamesWonInSet(player2, 1)).isEqualTo(0);
+        assertThat(tennisGame.getSetsWon(player1)).isEqualTo(1);
+        assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
+                "| John McEnroe | 6     | 0     | 0     |\n" + //
+                "| Ivan Lendl   | 0     | 0     | 0     |\n");
+    }
+
     private static void repeat(int times, Runnable runnable) {
         range(0, times).forEach(i -> runnable.run());
     }

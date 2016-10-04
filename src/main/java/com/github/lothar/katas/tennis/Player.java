@@ -1,5 +1,6 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
 import static com.github.lothar.katas.tennis.Score.ZERO;
 
 class Player {
@@ -24,14 +25,6 @@ class Player {
         score = score.next();
     }
 
-    public int getGamesWon() {
-        return gamesWon;
-    }
-
-    public void incrementGamesWon() {
-        gamesWon++;
-    }
-
     public void resetScore() {
         score = ZERO;
     }
@@ -40,7 +33,19 @@ class Player {
         this.score = score;
     }
 
+    public int getGamesWon() {
+        return gamesWon;
+    }
+
+    public void incrementGamesWon() {
+        gamesWon++;
+    }
+
+    public void setGamesWon(int gamesWon) {
+        this.gamesWon = gamesWon;
+    }
+
     public boolean hasAdvantage() {
-        return Score.ADVANTAGE.equals(score);
+        return ADVANTAGE.equals(score);
     }
 }
