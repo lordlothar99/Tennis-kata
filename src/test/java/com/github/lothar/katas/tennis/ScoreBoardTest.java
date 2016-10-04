@@ -10,13 +10,16 @@ import static com.github.lothar.katas.tennis.Score.THIRTY;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
+
 import org.junit.Test;
 
 public class ScoreBoardTest {
 
     private Player player1 = new Player("John");
     private Player player2 = new Player("Bob");
-    private ScoreBoard scoreBoard = new ScoreBoard(asList(player1, player2), ONE_SET);
+    private ScoreBoard scoreBoard =
+            new ScoreBoard(asList(player1, player2), ONE_SET, Optional.empty());
 
     @Test
     public void should_board_display_scores_when_scores_are_blank() {
@@ -118,7 +121,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_blank_and_three_sets() {
-        scoreBoard = new ScoreBoard(asList(player1, player2), THREE_SETS);
+        scoreBoard = new ScoreBoard(asList(player1, player2), THREE_SETS, Optional.empty());
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Score |\n" + //
                 "| John   | 0     | 0     | 0     | 0     |\n" + //
@@ -127,7 +130,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_blank_and_five_sets() {
-        scoreBoard = new ScoreBoard(asList(player1, player2), FIVE_SETS);
+        scoreBoard = new ScoreBoard(asList(player1, player2), FIVE_SETS, Optional.empty());
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
                 "| John   | 0     | 0     | 0     | 0     | 0     | 0     |\n" + //
@@ -136,7 +139,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_complex_and_five_sets() {
-        scoreBoard = new ScoreBoard(asList(player1, player2), FIVE_SETS);
+        scoreBoard = new ScoreBoard(asList(player1, player2), FIVE_SETS, Optional.empty());
         player1.setGamesWon(1);
         player1.newSet();
         player1.setGamesWon(2);
@@ -163,5 +166,15 @@ public class ScoreBoardTest {
                 "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
                 "| John   | 1     | 2     | 3     | 4     | 5     | 15    |\n" + //
                 "| Bob    | 6     | 7     | 8     | 9     | 10    | 30    |\n");
+    }
+
+    @Test
+    public void should_board_display_winner_when_match_is_over() {
+        scoreBoard = new ScoreBoard(asList(player1, player2), ONE_SET, Optional.of(player1));
+        player1.setGamesWon(6);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set 1 | Result |\n" + //
+                "| John   | 6     | WINNER |\n" + //
+                "| Bob    | 0     |        |\n");
     }
 }

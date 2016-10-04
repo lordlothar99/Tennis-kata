@@ -24,10 +24,7 @@ public class TennisGame {
     }
 
     public String getScoreBoard() {
-        return getWinnerPlayer() //
-                .map(p -> (AbstractBoard) new ResultBoard(players.values(), gameType, p)) //
-                .orElse(new ScoreBoard(players.values(), gameType)) //
-                .toString();
+        return new ScoreBoard(players.values(), gameType, getWinnerPlayer()).toString();
     }
 
     public Score getScore(String player) {
