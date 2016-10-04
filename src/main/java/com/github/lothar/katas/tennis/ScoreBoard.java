@@ -2,22 +2,27 @@ package com.github.lothar.katas.tennis;
 
 import static java.lang.Math.max;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
+import static java.util.stream.IntStream.rangeClosed;
 
 import java.util.Collection;
+import java.util.List;
 
 class ScoreBoard {
 
     private static final String PLAYER_COLUMN = "Player";
     private static final int PLAYER_COLUMN_LENGTH = PLAYER_COLUMN.length();
     private static final String SET_COLUMN = "Set";
-    private static final int SET_COLUMN_LENGTH = SET_COLUMN.length();
+    private static final int SET_COLUMN_LENGTH = SET_COLUMN.length() + 2;
     private static final String SCORE_COLUMN = "Score";
     private static final int SCORE_COLUMN_LENGTH = SCORE_COLUMN.length();
     private Collection<Player> players;
+    private GameType gameType;
 
     public ScoreBoard(Collection<Player> players, GameType gameType) {
         this.players = players;
+        this.gameType = gameType;
     }
 
     @Override
@@ -30,22 +35,31 @@ class ScoreBoard {
     }
 
     private String header() {
-        return line(PLAYER_COLUMN, SET_COLUMN, SCORE_COLUMN);
+        List<String> setsColumns = rangeClosed(1, gameType.setCount()) //
+                .mapToObj(set -> SET_COLUMN + " " + set) //
+                .collect(toList());
+        return line(PLAYER_COLUMN, setsColumns, SCORE_COLUMN);
     }
 
     private String scoreLine(Player player) {
-        return line(player.getName(), player.getGamesWon(), player.getScore());
+        List<Integer> gamesWonBySets = rangeClosed(1, gameType.setCount()) //
+                .mapToObj(set -> player.getGamesWonInSet(set)) //
+                .collect(toList());
+        return line(player.getName(), gamesWonBySets, player.getScore());
     }
 
-    private String line(String player, Object set, Object score) {
-        int maxPlayerNameLength = maxPlayerNameLength();
-        return "| " + //
-                fillToLength(player, maxPlayerNameLength) + //
+    private String line(String player, List<?> sets, Object score) {
+        String setColumns = sets.stream() //
+                .map(s -> fillToLength(s, SET_COLUMN_LENGTH)) //
+                .collect(joining(" | "));
+        String line = "| " + //
+                fillToLength(player, maxPlayerNameLength()) + //
                 " | " + //
-                fillToLength(set, SET_COLUMN_LENGTH) + //
+                setColumns + //
                 " | " + //
                 fillToLength(score, SCORE_COLUMN_LENGTH) + //
                 " |\n";
+        return line;
     }
 
     private int maxPlayerNameLength() {

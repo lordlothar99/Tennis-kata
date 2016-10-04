@@ -11,12 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
 public class ScoreBoardTest {
+
     private Player player1 = new Player("John");
     private Player player2 = new Player("Bob");
     private ScoreBoard scoreBoard = new ScoreBoard(asList(player1, player2), ONE_SET);
 
     @Test
     public void should_board_display_scores_when_scores_are_blank() {
+        System.out.println(scoreBoard.toString());
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 0     |\n" + //
