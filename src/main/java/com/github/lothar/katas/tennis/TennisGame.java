@@ -2,27 +2,24 @@ package com.github.lothar.katas.tennis;
 
 public class TennisGame {
 
-    private Score player1Score = Score.ZERO;
-    private Score player2Score = Score.ZERO;
+    private Player player1;
+    private Player player2;
 
-    public Score getPlayer1Score() {
-        return player1Score;
-    }
-
-    public Score getPlayer2Score() {
-        return player2Score;
-    }
-
-    public void player1Scores() {
-        player1Score = player1Score.next();
-    }
-
-    public void player2Scores() {
-        player2Score = player2Score.next();
+    public TennisGame(Player player1, Player player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
     public String getScores() {
-        return player1Score + "-" + player2Score;
+        return player1.getScore() + "-" + player2.getScore();
+    }
+
+    public Score getScore(Player player) {
+        return player.getScore();
+    }
+
+    public void scores(Player player) {
+        player.scores();
     }
 
 }
