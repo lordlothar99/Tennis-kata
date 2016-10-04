@@ -24,5 +24,6 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getPlayer1Score()).isEqualTo(FIFTEEN);
         assertThat(tennisGame.getPlayer2Score()).isEqualTo(ZERO);
+        assertThat(tennisGame.getScores()).isEqualTo("15-0");
     }
 }
