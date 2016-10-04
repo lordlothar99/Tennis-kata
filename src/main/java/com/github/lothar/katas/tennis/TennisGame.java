@@ -14,11 +14,11 @@ public class TennisGame {
     }
 
     public void player1Scores() {
-        player1Score = Score.FIFTEEN;
+        player1Score = player1Score.next();
     }
 
     public void player2Scores() {
-        player2Score = Score.FIFTEEN;
+        player2Score = player2Score.next();
     }
 
     public String getScores() {

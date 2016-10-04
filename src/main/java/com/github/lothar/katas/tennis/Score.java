@@ -1,8 +1,24 @@
 package com.github.lothar.katas.tennis;
 
 public enum Score {
-    ZERO("0"), //
-    FIFTEEN("15");
+    ZERO("0") {
+        @Override
+        public Score next() {
+            return FIFTEEN;
+        }
+    },
+    FIFTEEN("15") {
+        @Override
+        public Score next() {
+            return THIRTEEN;
+        }
+    },
+    THIRTEEN("30") {
+        @Override
+        public Score next() {
+            return null;
+        }
+    };
 
     private String value;
 
@@ -14,4 +30,6 @@ public enum Score {
     public String toString() {
         return value;
     }
+
+    public abstract Score next();
 }
