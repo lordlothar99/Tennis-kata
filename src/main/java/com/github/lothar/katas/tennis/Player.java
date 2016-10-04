@@ -7,6 +7,7 @@ import java.util.Stack;
 
 class Player {
 
+    private static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     private Score score = ZERO;
     private Stack<Integer> gamesWonBySet = new Stack<>();
     private int setsWon;
@@ -72,5 +73,13 @@ class Player {
     public void newSet() {
         gamesWonBySet.add(0);
         newGame();
+    }
+
+    public boolean hasWonAtLeastFiveGames() {
+        return getGamesWon() >= (GAMES_COUNT_TO_WIN_A_SET - 1);
+    }
+
+    public boolean hasAtLeastOneGameMoreThan(Player opponent) {
+        return getGamesWon() > opponent.getGamesWon();
     }
 }

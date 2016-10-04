@@ -26,8 +26,15 @@ public abstract class AbstractScoreCalculator implements ScoreCalculator {
     }
 
     private boolean isSetPointFor(Player player) {
-        return player.getGamesWon() == (TennisGame.GAMES_COUNT_TO_WIN_A_SET - 1) //
-                && isGamePointFor(player);
+        return isGamePointFor(player) && //
+                player.hasAtLeastOneGameMoreThan(opponent(player)) //
+                && player.hasWonAtLeastFiveGames(); //
+    }
+
+    private Player opponent(Player player) {
+        return players.stream() //
+                .filter(p -> !player.equals(p)) //
+                .findFirst().get();
     }
 
     private boolean isGamePointFor(Player player) {
