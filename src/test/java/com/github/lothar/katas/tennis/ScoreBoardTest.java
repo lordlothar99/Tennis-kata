@@ -1,5 +1,9 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
+import static com.github.lothar.katas.tennis.Score.FIFTEEN;
+import static com.github.lothar.katas.tennis.Score.FOURTY;
+import static com.github.lothar.katas.tennis.Score.THIRTY;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,10 +16,81 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_blank() {
-        String string = scoreBoard.toString();
-        assertThat(string).isEqualTo("" + //
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set | Score |\n" + //
                 "| John   | 0   | 0     |\n" + //
                 "| Bob    | 0   | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player1_has_fifteen() {
+        player1.setScore(FIFTEEN);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 15    |\n" + //
+                "| Bob    | 0   | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player1_has_thirty() {
+        player1.setScore(THIRTY);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 30    |\n" + //
+                "| Bob    | 0   | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player1_has_fourty() {
+        player1.setScore(FOURTY);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 40    |\n" + //
+                "| Bob    | 0   | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player1_has_advantage() {
+        player1.setScore(ADVANTAGE);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | ADV   |\n" + //
+                "| Bob    | 0   | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player2_has_fifteen() {
+        player2.setScore(FIFTEEN);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 0     |\n" + //
+                "| Bob    | 0   | 15    |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player2_has_thirty() {
+        player2.setScore(THIRTY);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 0     |\n" + //
+                "| Bob    | 0   | 30    |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player2_has_fourty() {
+        player2.setScore(FOURTY);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 0     |\n" + //
+                "| Bob    | 0   | 40    |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player2_has_advantage() {
+        player2.setScore(ADVANTAGE);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 0     |\n" + //
+                "| Bob    | 0   | ADV   |\n");
     }
 }
