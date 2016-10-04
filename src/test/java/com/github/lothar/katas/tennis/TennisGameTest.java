@@ -149,7 +149,7 @@ public class TennisGameTest {
                 "| Ivan Lendl   | 0   | 40    |\n");
     }
 
-    private void repeat(int times, Runnable runnable) {
+    private static void repeat(int times, Runnable runnable) {
         range(0, times).forEach(i -> runnable.run());
     }
 }
