@@ -27,11 +27,9 @@ class ScoreBoard {
 
     @Override
     public String toString() {
-        String header = header();
-        String playerScores = players.stream() //
+        return header() + players.stream() //
                 .map(p -> scoreLine(p)) //
                 .collect(joining(""));
-        return header + playerScores;
     }
 
     private String header() {
