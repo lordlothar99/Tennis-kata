@@ -26,4 +26,8 @@ public class Player {
     public void resetScore() {
         score = ZERO;
     }
+
+    public void setScore(Score score) {
+        this.score = score;
+    }
 }

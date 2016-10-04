@@ -25,12 +25,24 @@ public class TennisGame {
 
     public void scores(Player player) {
         Score score = player.getScore();
-        if (FOURTY.equals(score) && !isDeuce() //
+        if (opponentHasAdvantage(player)) {
+            player1.setScore(FOURTY);
+            player2.setScore(FOURTY);
+        } else if (FOURTY.equals(score) && !isDeuce() //
                 || ADVANTAGE.equals(score)) {
             winsGame(player);
         } else {
             player.incrementScore();
         }
+    }
+
+    private boolean opponentHasAdvantage(Player player) {
+        Player opponent = opponent(player);
+        return ADVANTAGE.equals(opponent.getScore());
+    }
+
+    private Player opponent(Player player) {
+        return player1.equals(player) ? player2 : player1;
     }
 
     private boolean isDeuce() {
