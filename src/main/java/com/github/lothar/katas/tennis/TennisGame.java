@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public class TennisGame {
 
-    private ScoreCalculator scoreCalculator;
     private Map<String, Player> players = new HashMap<>();
 
     public TennisGame(String player1, String player2) {
@@ -33,12 +32,12 @@ public class TennisGame {
     }
 
     public void scores(String player) {
-        updateCalculator();
-        scoreCalculator.scores(getPlayer(player));
+        ScoreCalculator scoreCalculator = getCalculator();
+        scoreCalculator.playerScores(getPlayer(player));
     }
 
-    private void updateCalculator() {
-        scoreCalculator = isDeuce() ? new Deuce() //
+    private ScoreCalculator getCalculator() {
+        return isDeuce() ? new Deuce() //
                 : playerWithAdvantage() //
                         .map(p -> (ScoreCalculator) new Advantage(p)) //
                         .orElse(new Normal());
@@ -86,12 +85,12 @@ public class TennisGame {
     }
 
     private interface ScoreCalculator {
-        void scores(Player player);
+        void playerScores(Player player);
     }
 
     private class Normal implements ScoreCalculator {
         @Override
-        public void scores(Player player) {
+        public void playerScores(Player player) {
             if (FOURTY.equals(player.getScore())) {
                 winsGame(player);
             } else {
@@ -102,7 +101,7 @@ public class TennisGame {
 
     private class Deuce implements ScoreCalculator {
         @Override
-        public void scores(Player player) {
+        public void playerScores(Player player) {
             player.incrementScore();
         }
     }
@@ -115,7 +114,7 @@ public class TennisGame {
         }
 
         @Override
-        public void scores(Player player) {
+        public void playerScores(Player player) {
             if (playerWithAdvantage.equals(player)) {
                 winsGame(player);
             } else {
