@@ -167,9 +167,9 @@ public class TennisGameTest {
         assertThat(tennisGame.getSetsWon(player1)).isEqualTo(1);
         assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
         assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
-                "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
-                "| John McEnroe | 6     | 0     | 0     |\n" + //
-                "| Ivan Lendl   | 0     | 0     | 0     |\n");
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 15    |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     private static void repeat(int times, Runnable runnable) {

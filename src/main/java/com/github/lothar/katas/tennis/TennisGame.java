@@ -24,6 +24,10 @@ public class TennisGame {
         return getPlayer(player).getScore();
     }
 
+    public int getGamesWonInSet(String player, int set) {
+        return getPlayer(player).getGamesWonInSet(set);
+    }
+
     Player getPlayer(String player) {
         return players.get(player);
     }
@@ -56,9 +60,29 @@ public class TennisGame {
     }
 
     private void winsGame(Player player) {
-        player.incrementGamesWon();
-        players.values().stream() //
-                .forEach(p -> p.resetScore());
+        if (isSetPointFor(player)) {
+            player.incrementGamesWon();
+            player.incrementSetWon();
+            players.values().stream() //
+                    .forEach(p -> p.newSet());
+        } else {
+            player.incrementGamesWon();
+            players.values().stream() //
+                    .forEach(p -> p.newGame());
+        }
+    }
+
+    private boolean isSetPointFor(Player player) {
+        return player.getGamesWon() == 5 && isGamePointFor(player);
+    }
+
+    private boolean isGamePointFor(Player player) {
+        return (!isDeuce() && FOURTY.equals(player.getScore())) //
+                || player.hasAdvantage();
+    }
+
+    public int getSetsWon(String player) {
+        return getPlayer(player).getSetsWon();
     }
 
     private interface ScoreCalculator {

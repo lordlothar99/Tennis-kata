@@ -3,14 +3,18 @@ package com.github.lothar.katas.tennis;
 import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
 import static com.github.lothar.katas.tennis.Score.ZERO;
 
+import java.util.Stack;
+
 class Player {
 
     private Score score = ZERO;
-    private int gamesWon = 0;
+    private Stack<Integer> gamesWonBySet = new Stack<>();
+    private int setsWon;
     private String name;
 
     public Player(String name) {
         this.name = name;
+        gamesWonBySet.add(0);
     }
 
     public String getName() {
@@ -25,7 +29,7 @@ class Player {
         score = score.next();
     }
 
-    public void resetScore() {
+    public void newGame() {
         score = ZERO;
     }
 
@@ -34,18 +38,35 @@ class Player {
     }
 
     public int getGamesWon() {
-        return gamesWon;
+        return gamesWonBySet.peek();
     }
 
     public void incrementGamesWon() {
-        gamesWon++;
+        setGamesWon(getGamesWon() + 1);
     }
 
     public void setGamesWon(int gamesWon) {
-        this.gamesWon = gamesWon;
+        gamesWonBySet.set(gamesWonBySet.size() - 1, gamesWon);
     }
 
     public boolean hasAdvantage() {
         return ADVANTAGE.equals(score);
+    }
+
+    public int getGamesWonInSet(int set) {
+        return gamesWonBySet.get(set - 1);
+    }
+
+    public int getSetsWon() {
+        return setsWon;
+    }
+
+    public void incrementSetWon() {
+        setsWon++;
+    }
+
+    public void newSet() {
+        gamesWonBySet.add(0);
+        newGame();
     }
 }
