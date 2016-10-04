@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class TennisGame {
 
-    private ScoreCalculator scoreCalculator = new Normal();
+    private ScoreCalculator scoreCalculator;
     private Map<String, Player> players = new HashMap<>();
 
     public TennisGame(String player1, String player2) {
@@ -24,13 +24,13 @@ public class TennisGame {
         return getPlayer(player).getScore();
     }
 
-    private Player getPlayer(String player) {
+    Player getPlayer(String player) {
         return players.get(player);
     }
 
     public void scores(String player) {
-        scoreCalculator.scores(getPlayer(player));
         updateCalculator();
+        scoreCalculator.scores(getPlayer(player));
     }
 
     private void updateCalculator() {
