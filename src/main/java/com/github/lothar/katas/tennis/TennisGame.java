@@ -60,28 +60,24 @@ public class TennisGame {
     }
 
     private class NormalState implements GameState {
-
         @Override
         public void scores(Player player) {
-            Score score = player.getScore();
-            if (FOURTY.equals(score)) {
+            if (FOURTY.equals(player.getScore())) {
                 winsGame(player);
             } else {
-                player.setScore(player.getScore().next());
+                player.incrementScore();
             }
         }
     }
 
     private class DeuceState implements GameState {
-
         @Override
         public void scores(Player player) {
-            player.setScore(player.getScore().next());
+            player.incrementScore();
         }
     }
 
     private class AdvantageState implements GameState {
-
         private Player playerWithAdvantage;
 
         public AdvantageState(Player playerWithAdvantage) {
