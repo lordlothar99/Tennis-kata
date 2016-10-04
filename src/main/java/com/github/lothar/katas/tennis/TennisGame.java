@@ -1,19 +1,19 @@
 package com.github.lothar.katas.tennis;
 
 public class TennisGame {
-    
-    private int player1Score = 0;
 
-    public int getPlayer1Score() {
+    private Score player1Score = Score.ZERO;
+
+    public Score getPlayer1Score() {
         return player1Score;
     }
 
-    public int getPlayer2Score() {
-        return 0;
+    public Score getPlayer2Score() {
+        return Score.ZERO;
     }
 
     public void player1Scores() {
-        player1Score = 15;
+        player1Score = Score.FIFTEEN;
     }
 
 }
