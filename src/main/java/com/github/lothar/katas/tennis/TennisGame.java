@@ -49,7 +49,7 @@ public class TennisGame {
         return player.getGamesWon();
     }
 
-    protected void winsGame(Player player) {
+    private void winsGame(Player player) {
         player.incrementGamesWon();
         player1.resetScore();
         player2.resetScore();
