@@ -1,5 +1,6 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.GameType.FIVE_SETS;
 import static com.github.lothar.katas.tennis.GameType.ONE_SET;
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
@@ -122,5 +123,14 @@ public class ScoreBoardTest {
                 "| Player | Set 1 | Set 2 | Set 3 | Score |\n" + //
                 "| John   | 0     | 0     | 0     | 0     |\n" + //
                 "| Bob    | 0     | 0     | 0     | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_scores_are_blank_and_five_sets() {
+        scoreBoard = new ScoreBoard(asList(player1, player2), FIVE_SETS);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
+                "| John   | 0     | 0     | 0     | 0     | 0     | 0     |\n" + //
+                "| Bob    | 0     | 0     | 0     | 0     | 0     | 0     |\n");
     }
 }
