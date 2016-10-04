@@ -43,8 +43,7 @@ public class TennisGame {
     }
 
     private void updateState() {
-        scoreCalculator = isDeuce() //
-                ? new Deuce() //
+        scoreCalculator = isDeuce() ? new Deuce() //
                 : playerWithAdvantage() //
                         .map(p -> (ScoreCalculator) new Advantage(p)) //
                         .orElse(new Normal());
