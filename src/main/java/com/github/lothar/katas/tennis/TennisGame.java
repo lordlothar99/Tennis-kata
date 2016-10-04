@@ -1,5 +1,7 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.Score.FOURTEEN;
+
 public class TennisGame {
 
     private Player player1;
@@ -22,11 +24,16 @@ public class TennisGame {
 
     public void scores(Player player) {
         Score score = player.getScore();
-        if (Score.FOURTEEN.equals(score)) {
+        if (FOURTEEN.equals(score) && !isDeuce()) {
             winsGame(player);
         } else {
             player.incrementScore();
         }
+    }
+
+    private boolean isDeuce() {
+        return FOURTEEN.equals(player1.getScore()) //
+                && FOURTEEN.equals(player2.getScore());
     }
 
     private void winsGame(Player player) {

@@ -1,5 +1,6 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
 import static com.github.lothar.katas.tennis.Score.FIFTEEN;
 import static com.github.lothar.katas.tennis.Score.FOURTEEN;
 import static com.github.lothar.katas.tennis.Score.THIRTEEN;
@@ -77,6 +78,19 @@ public class TennisGameTest {
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(1);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
         assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
+    }
+
+    @Test
+    public void should_player1_have_an_advantage_when_scores_is_deuce_and_player1_scores() {
+        repeat(3, () -> tennisGame.scores(player1));
+        repeat(3, () -> tennisGame.scores(player2));
+        tennisGame.scores(player1);
+
+        assertThat(tennisGame.getScore(player1)).isEqualTo(ADVANTAGE);
+        assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTEEN);
+        assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
+        assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; ADV-40");
     }
 
     private void repeat(int times, Runnable runnable) {
