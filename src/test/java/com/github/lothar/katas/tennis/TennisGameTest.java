@@ -12,8 +12,8 @@ import org.junit.Test;
 
 public class TennisGameTest {
 
-    private Player player1 = new Player();
-    private Player player2 = new Player();
+    private String player1 = "John McEnroe";
+    private String player2 = "Ivan Lendl";
     private TennisGame tennisGame = new TennisGame(player1, player2);
 
     @Test

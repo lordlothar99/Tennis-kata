@@ -2,10 +2,19 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.Score.ZERO;
 
-public class Player {
+class Player {
 
     private Score score = ZERO;
     private int gamesWon = 0;
+    private String name;
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public Score getScore() {
         return score;

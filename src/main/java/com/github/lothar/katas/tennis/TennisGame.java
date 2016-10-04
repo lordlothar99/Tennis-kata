@@ -1,58 +1,76 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.Score.FOURTY;
+import static java.util.stream.Collectors.joining;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class TennisGame {
 
-    private Player player1;
-    private Player player2;
     private ScoreCalculator scoreCalculator = new Normal();
+    private Map<String, Player> players = new HashMap<>();
 
-    public TennisGame(Player player1, Player player2) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public TennisGame(String player1, String player2) {
+        players.put(player1, new Player(player1));
+        players.put(player2, new Player(player2));
     }
 
     public String getScores() {
-        String games = player1.getGamesWon() + "-" + player2.getGamesWon();
-        String scores = player1.getScore() + "-" + player2.getScore();
+        String games = players.values().stream() //
+                .map(player -> player.getGamesWon()) //
+                .map(gamesWon -> String.valueOf(gamesWon)) //
+                .collect(joining("-"));
+        String scores = players.values().stream() //
+                .map(player -> player.getScore()) //
+                .map(score -> String.valueOf(score)) // 1
+                .collect(joining("-"));
         return games + " ; " + scores;
     }
 
-    public Score getScore(Player player) {
-        return player.getScore();
+    public Score getScore(String player) {
+        return getPlayer(player).getScore();
     }
 
-    public void scores(Player player) {
-        scoreCalculator.scores(player);
+    private Player getPlayer(String player) {
+        return players.get(player);
+    }
+
+    public void scores(String player) {
+        scoreCalculator.scores(getPlayer(player));
         updateState();
     }
 
     private void updateState() {
         if (isDeuce()) {
             scoreCalculator = new Deuce();
-        } else if (player1.hasAdvantage()) {
-            scoreCalculator = new Advantage(player1);
-        } else if (player2.hasAdvantage()) {
-            scoreCalculator = new Advantage(player2);
         } else {
-            scoreCalculator = new Normal();
+            scoreCalculator = playerWithAdvantage() //
+                    .map(p -> (ScoreCalculator) new Advantage(p)) //
+                    .orElse(new Normal());
         }
     }
 
-    private boolean isDeuce() {
-        return FOURTY.equals(player1.getScore()) //
-                && FOURTY.equals(player2.getScore());
+    private Optional<Player> playerWithAdvantage() {
+        return players.values().stream() //
+                .filter(p -> p.hasAdvantage()) //
+                .findFirst();
     }
 
-    public int getGamesWon(Player player) {
-        return player.getGamesWon();
+    private boolean isDeuce() {
+        return players.values().stream() //
+                .allMatch(p -> FOURTY.equals(p.getScore()));
+    }
+
+    public int getGamesWon(String player) {
+        return getPlayer(player).getGamesWon();
     }
 
     private void winsGame(Player player) {
         player.incrementGamesWon();
-        player1.resetScore();
-        player2.resetScore();
+        players.values().stream() //
+                .forEach(p -> p.resetScore());
     }
 
     private interface ScoreCalculator {
@@ -89,8 +107,8 @@ public class TennisGame {
             if (playerWithAdvantage.equals(player)) {
                 winsGame(player);
             } else {
-                player1.setScore(FOURTY);
-                player2.setScore(FOURTY);
+                players.values().stream() //
+                        .forEach(p -> p.setScore(FOURTY));
             }
         }
     }
