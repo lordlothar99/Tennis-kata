@@ -135,9 +135,8 @@ public class TennisGameTest {
 
     @Test
     public void should_players_be_at_deuce_when_player1_had_advantage_but_player2_scores() {
-        repeat(3, () -> tennisGame.scores(player1));
-        repeat(3, () -> tennisGame.scores(player2));
-        tennisGame.scores(player1);
+        tennisGame.getPlayer(player1).setScore(ADVANTAGE);
+        tennisGame.getPlayer(player2).setScore(FOURTY);
         tennisGame.scores(player2);
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTY);
