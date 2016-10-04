@@ -4,6 +4,7 @@ import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.Score.FOURTY;
 import static java.util.Comparator.comparingInt;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -51,8 +52,8 @@ public class TennisGame {
     private ScoreCalculator getCalculator() {
         return isDeuce() ? new Deuce() //
                 : playerWithAdvantage() //
-                        .map(p -> (ScoreCalculator) new Advantage(p)) //
-                        .orElse(new Normal());
+                        .map(p -> (ScoreCalculator) new Advantage(players.values(), p)) //
+                        .orElse(new Normal(players.values()));
     }
 
     private Optional<Player> playerWithAdvantage() {
@@ -93,11 +94,16 @@ public class TennisGame {
                 .sum();
     }
 
-    private interface ScoreCalculator {
+    static interface ScoreCalculator {
         void playerScores(Player player);
     }
 
-    private class Normal extends AbstractScoreCalculator {
+    static class Normal extends AbstractScoreCalculator {
+
+        public Normal(Collection<Player> players) {
+            super(players);
+        }
+
         @Override
         public void playerScores(Player player) {
             if (FOURTY.equals(player.getScore())) {
@@ -108,17 +114,18 @@ public class TennisGame {
         }
     }
 
-    private class Deuce implements ScoreCalculator {
+    static class Deuce implements ScoreCalculator {
         @Override
         public void playerScores(Player player) {
             player.incrementScore();
         }
     }
 
-    private class Advantage extends AbstractScoreCalculator {
+    static class Advantage extends AbstractScoreCalculator {
         private Player playerWithAdvantage;
 
-        public Advantage(Player playerWithAdvantage) {
+        public Advantage(Collection<Player> players, Player playerWithAdvantage) {
+            super(players);
             this.playerWithAdvantage = playerWithAdvantage;
         }
 
@@ -127,22 +134,29 @@ public class TennisGame {
             if (playerWithAdvantage.equals(player)) {
                 winsGame(player);
             } else {
-                players.values().stream() //
+                players.stream() //
                         .forEach(p -> p.setScore(FOURTY));
             }
         }
     }
 
-    private abstract class AbstractScoreCalculator implements ScoreCalculator {
+    static abstract class AbstractScoreCalculator implements ScoreCalculator {
+
+        protected Collection<Player> players;
+
+        public AbstractScoreCalculator(Collection<Player> players) {
+            this.players = players;
+        }
+
         protected void winsGame(Player player) {
             if (isSetPointFor(player)) {
                 player.incrementGamesWon();
                 player.incrementSetWon();
-                players.values().stream() //
+                players.stream() //
                         .forEach(p -> p.newSet());
             } else {
                 player.incrementGamesWon();
-                players.values().stream() //
+                players.stream() //
                         .forEach(p -> p.newGame());
             }
         }
@@ -153,7 +167,7 @@ public class TennisGame {
         }
 
         private boolean isGamePointFor(Player player) {
-            return (!isDeuce() && FOURTY.equals(player.getScore())) //
+            return FOURTY.equals(player.getScore()) //
                     || player.hasAdvantage();
         }
     }
