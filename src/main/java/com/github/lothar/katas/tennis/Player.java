@@ -1,6 +1,7 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
+import static com.github.lothar.katas.tennis.Score.FOURTY;
 import static com.github.lothar.katas.tennis.Score.ZERO;
 
 import java.util.Stack;
@@ -81,5 +82,10 @@ class Player {
 
     public boolean hasAtLeastOneGameMoreThan(Player opponent) {
         return getGamesWon() > opponent.getGamesWon();
+    }
+
+    public boolean isGamePoint() {
+        return FOURTY.equals(score) //
+                || hasAdvantage();
     }
 }

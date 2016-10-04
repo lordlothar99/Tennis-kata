@@ -1,7 +1,5 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.Score.FOURTY;
-
 import java.util.Collection;
 
 public abstract class AbstractScoreCalculator implements ScoreCalculator {
@@ -26,8 +24,8 @@ public abstract class AbstractScoreCalculator implements ScoreCalculator {
     }
 
     private boolean isSetPointFor(Player player) {
-        return isGamePointFor(player) && //
-                player.hasAtLeastOneGameMoreThan(opponent(player)) //
+        return player.isGamePoint() //
+                && player.hasAtLeastOneGameMoreThan(opponent(player)) //
                 && player.hasWonAtLeastFiveGames(); //
     }
 
@@ -35,10 +33,5 @@ public abstract class AbstractScoreCalculator implements ScoreCalculator {
         return players.stream() //
                 .filter(p -> !player.equals(p)) //
                 .findFirst().get();
-    }
-
-    private boolean isGamePointFor(Player player) {
-        return FOURTY.equals(player.getScore()) //
-                || player.hasAdvantage();
     }
 }
