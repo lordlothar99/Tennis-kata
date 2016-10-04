@@ -11,10 +11,6 @@ public class Player {
         return score;
     }
 
-    public void incrementScore() {
-        score = score.next();
-    }
-
     public int getGamesWon() {
         return gamesWon;
     }

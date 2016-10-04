@@ -32,7 +32,7 @@ public class TennisGame {
                 || ADVANTAGE.equals(score)) {
             winsGame(player);
         } else {
-            player.incrementScore();
+            player.setScore(player.getScore().next());
         }
     }
 
