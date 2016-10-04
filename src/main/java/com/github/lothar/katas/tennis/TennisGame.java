@@ -1,5 +1,6 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.Score.FOURTY;
 
 import java.util.HashMap;
@@ -8,15 +9,21 @@ import java.util.Optional;
 
 public class TennisGame {
 
+    private GameType gameType;
     private Map<String, Player> players = new HashMap<>();
 
     public TennisGame(String player1, String player2) {
+        this(player1, player2, THREE_SETS);
+    }
+
+    public TennisGame(String player1, String player2, GameType gameType) {
+        this.gameType = gameType;
         players.put(player1, new Player(player1));
         players.put(player2, new Player(player2));
     }
 
     public String getScoreBoard() {
-        return new ScoreBoard(players.values()).toString();
+        return new ScoreBoard(players.values(), gameType).toString();
     }
 
     public Score getScore(String player) {

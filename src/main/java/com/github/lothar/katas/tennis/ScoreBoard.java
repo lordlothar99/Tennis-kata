@@ -16,7 +16,7 @@ class ScoreBoard {
     private static final int SCORE_COLUMN_LENGTH = SCORE_COLUMN.length();
     private Collection<Player> players;
 
-    public ScoreBoard(Collection<Player> players) {
+    public ScoreBoard(Collection<Player> players, GameType gameType) {
         this.players = players;
     }
 
