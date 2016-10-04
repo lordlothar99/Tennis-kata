@@ -8,18 +8,16 @@ import org.junit.Test;
 
 public class TennisGameTest {
 
+    private TennisGame tennisGame = new TennisGame();
+
     @Test
     public void should_both_players_have_0_points_when_game_starts() {
-        TennisGame tennisGame = new TennisGame();
-
         assertThat(tennisGame.getPlayer1Score()).isEqualTo(ZERO);
         assertThat(tennisGame.getPlayer2Score()).isEqualTo(ZERO);
     }
 
     @Test
     public void should_score_be_15_0_when_first_player_wins_one_point() {
-        TennisGame tennisGame = new TennisGame();
-
         tennisGame.player1Scores();
 
         assertThat(tennisGame.getPlayer1Score()).isEqualTo(FIFTEEN);
