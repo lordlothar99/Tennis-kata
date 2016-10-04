@@ -118,7 +118,7 @@ public class TennisGameTest {
         assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTY);
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 0-0");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 40-40");
     }
 
     private void repeat(int times, Runnable runnable) {
