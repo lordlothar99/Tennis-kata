@@ -93,4 +93,22 @@ public class ScoreBoardTest {
                 "| John   | 0   | 0     |\n" + //
                 "| Bob    | 0   | ADV   |\n");
     }
+
+    @Test
+    public void should_board_display_scores_when_player1_has_one_set() {
+        player1.setGamesWon(1);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 1   | 0     |\n" + //
+                "| Bob    | 0   | 0     |\n");
+    }
+
+    @Test
+    public void should_board_display_scores_when_player2_has_one_set() {
+        player2.setGamesWon(1);
+        assertThat(scoreBoard.toString()).isEqualTo("" + //
+                "| Player | Set | Score |\n" + //
+                "| John   | 0   | 0     |\n" + //
+                "| Bob    | 1   | 0     |\n");
+    }    
 }
