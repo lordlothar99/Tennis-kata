@@ -40,6 +40,9 @@ public class TennisGame {
     }
 
     public void scores(String player) {
+        if (isMatchOver()) {
+            throw new MatchIsOverException();
+        }
         ScoreCalculator scoreCalculator = getCalculator();
         scoreCalculator.playerScores(getPlayer(player));
     }
