@@ -4,7 +4,6 @@ import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.Score.FOURTY;
 import static java.util.Comparator.comparingInt;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -92,83 +91,5 @@ public class TennisGame {
         return gameType.setCount() == players.values().stream() //
                 .mapToInt(Player::getSetsWon) //
                 .sum();
-    }
-
-    static interface ScoreCalculator {
-        void playerScores(Player player);
-    }
-
-    static class Normal extends AbstractScoreCalculator {
-
-        public Normal(Collection<Player> players) {
-            super(players);
-        }
-
-        @Override
-        public void playerScores(Player player) {
-            if (FOURTY.equals(player.getScore())) {
-                winsGame(player);
-            } else {
-                player.incrementScore();
-            }
-        }
-    }
-
-    static class Deuce implements ScoreCalculator {
-        @Override
-        public void playerScores(Player player) {
-            player.incrementScore();
-        }
-    }
-
-    static class Advantage extends AbstractScoreCalculator {
-        private Player playerWithAdvantage;
-
-        public Advantage(Collection<Player> players, Player playerWithAdvantage) {
-            super(players);
-            this.playerWithAdvantage = playerWithAdvantage;
-        }
-
-        @Override
-        public void playerScores(Player player) {
-            if (playerWithAdvantage.equals(player)) {
-                winsGame(player);
-            } else {
-                players.stream() //
-                        .forEach(p -> p.setScore(FOURTY));
-            }
-        }
-    }
-
-    static abstract class AbstractScoreCalculator implements ScoreCalculator {
-
-        protected Collection<Player> players;
-
-        public AbstractScoreCalculator(Collection<Player> players) {
-            this.players = players;
-        }
-
-        protected void winsGame(Player player) {
-            if (isSetPointFor(player)) {
-                player.incrementGamesWon();
-                player.incrementSetWon();
-                players.stream() //
-                        .forEach(p -> p.newSet());
-            } else {
-                player.incrementGamesWon();
-                players.stream() //
-                        .forEach(p -> p.newGame());
-            }
-        }
-
-        private boolean isSetPointFor(Player player) {
-            return player.getGamesWon() == (GAMES_COUNT_TO_WIN_A_SET - 1) //
-                    && isGamePointFor(player);
-        }
-
-        private boolean isGamePointFor(Player player) {
-            return FOURTY.equals(player.getScore()) //
-                    || player.hasAdvantage();
-        }
     }
 }
