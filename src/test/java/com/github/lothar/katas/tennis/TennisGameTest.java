@@ -4,6 +4,7 @@ import static com.github.lothar.katas.tennis.Score.FIFTEEN;
 import static com.github.lothar.katas.tennis.Score.FOURTEEN;
 import static com.github.lothar.katas.tennis.Score.THIRTEEN;
 import static com.github.lothar.katas.tennis.Score.ZERO;
+import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
@@ -51,8 +52,7 @@ public class TennisGameTest {
 
     @Test
     public void should_score_be_30_0_when_first_player_scored_two_times() {
-        tennisGame.scores(player1);
-        tennisGame.scores(player1);
+        repeat(2, () -> tennisGame.scores(player1));
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(THIRTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
@@ -61,9 +61,7 @@ public class TennisGameTest {
 
     @Test
     public void should_score_be_40_0_when_first_player_scored_three_times() {
-        tennisGame.scores(player1);
-        tennisGame.scores(player1);
-        tennisGame.scores(player1);
+        repeat(3, () -> tennisGame.scores(player1));
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
@@ -72,13 +70,14 @@ public class TennisGameTest {
 
     @Test
     public void should_score_be_1game_to_0_and_0_0_in_2nd_game_when_first_player_scored_four_times_in_a_row() {
-        tennisGame.scores(player1);
-        tennisGame.scores(player1);
-        tennisGame.scores(player1);
-        tennisGame.scores(player1);
+        repeat(4, () -> tennisGame.scores(player1));
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
         assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
+    }
+
+    private void repeat(int times, Runnable runnable) {
+        range(0, times).forEach(i -> runnable.run());
     }
 }
