@@ -54,7 +54,11 @@ class Player {
     }
 
     public int getGamesWonInSet(int set) {
-        return gamesWonBySet.get(set - 1);
+        if (gamesWonBySet.size() < set) {
+            return 0;
+        } else {
+            return gamesWonBySet.get(set - 1);
+        }
     }
 
     public int getSetsWon() {
