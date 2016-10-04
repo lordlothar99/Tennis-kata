@@ -18,8 +18,7 @@ public class TennisGameTest {
     public void should_both_players_have_0_points_when_game_starts() {
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getGameScores()).isEqualTo("00-0");
-        assertThat(tennisGame.getFullScores()).isEqualTo("0-0 ; 0-0");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 0-0");
     }
 
     @Test
@@ -28,8 +27,7 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getGameScores()).isEqualTo("15-0");
-        assertThat(tennisGame.getFullScores()).isEqualTo("0-0 ; 15-0");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 15-0");
     }
 
     @Test
@@ -38,8 +36,7 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(FIFTEEN);
-        assertThat(tennisGame.getGameScores()).isEqualTo("0-15");
-        assertThat(tennisGame.getFullScores()).isEqualTo("0-0 ; 0-15");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 0-15");
     }
 
     @Test
@@ -49,8 +46,7 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(FIFTEEN);
-        assertThat(tennisGame.getGameScores()).isEqualTo("15-15");
-        assertThat(tennisGame.getFullScores()).isEqualTo("0-0 ; 15-15");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 15-15");
     }
 
     @Test
@@ -60,8 +56,7 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(THIRTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getGameScores()).isEqualTo("30-0");
-        assertThat(tennisGame.getFullScores()).isEqualTo("0-0 ; 30-0");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 30-0");
     }
 
     @Test
@@ -72,8 +67,7 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getGameScores()).isEqualTo("40-0");
-        assertThat(tennisGame.getFullScores()).isEqualTo("0-0 ; 40-0");
+        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 40-0");
     }
 
     @Test
@@ -85,7 +79,6 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getFullScores()).isEqualTo("1-0 ; 0-0");
-        assertThat(tennisGame.getGameScores()).isEqualTo("0-0");
+        assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
     }
 }
