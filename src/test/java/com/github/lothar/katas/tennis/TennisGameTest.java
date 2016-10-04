@@ -214,6 +214,32 @@ public abstract class TennisGameTest {
         }
     }
 
+    public static class CommonRules extends TennisGameTest {
+        private TennisGame tennisGame = new TennisGame(player1, player2, ONE_SET);
+
+        @Test
+        public void should_set_still_continue_when_not_two_games_of_difference_in_one_set() {
+            tennisGame.getPlayer(player1).setGamesWon(5);
+            tennisGame.getPlayer(player2).setGamesWon(5);
+            tennisGame.getPlayer(player1).setScore(ADVANTAGE);
+            tennisGame.getPlayer(player2).setScore(ZERO);
+            tennisGame.scores(player1);
+            tennisGame.scores(player1);
+
+            assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
+            assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
+            assertThat(tennisGame.getGamesWon(player1)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWon(player2)).isEqualTo(5);
+            assertThat(tennisGame.getSetsWon(player1)).isEqualTo(0);
+            assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
+            assertThat(tennisGame.getWinner()).isNull();
+            assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                    "| Player       | Set 1 | Score |\n" + //
+                    "| John McEnroe | 6     | 15    |\n" + //
+                    "| Ivan Lendl   | 5     | 0     |\n");
+        }
+    }
+
     protected static void repeat(int times, Runnable runnable) {
         range(0, times).forEach(i -> runnable.run());
     }
