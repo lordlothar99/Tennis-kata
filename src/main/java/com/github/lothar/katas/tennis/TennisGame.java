@@ -39,10 +39,10 @@ public class TennisGame {
 
     public void scores(String player) {
         scoreCalculator.scores(getPlayer(player));
-        updateState();
+        updateCalculator();
     }
 
-    private void updateState() {
+    private void updateCalculator() {
         scoreCalculator = isDeuce() ? new Deuce() //
                 : playerWithAdvantage() //
                         .map(p -> (ScoreCalculator) new Advantage(p)) //
