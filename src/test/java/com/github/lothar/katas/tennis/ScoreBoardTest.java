@@ -164,14 +164,4 @@ public class ScoreBoardTest {
                 "| John   | 1     | 2     | 3     | 4     | 5     | 15    |\n" + //
                 "| Bob    | 6     | 7     | 8     | 9     | 10    | 30    |\n");
     }
-
-    @Test
-    public void should_board_display_winner_when_match_is_over() {
-        scoreBoard = new ScoreBoard(asList(player1, player2), ONE_SET);
-        player1.setGamesWon(6);
-        assertThat(scoreBoard.toString()).isEqualTo("" + //
-                "| Player | Set 1 | Result |\n" + //
-                "| John   | 6     | WINNER |\n" + //
-                "| Bob    | 0     |        |\n");
-    }
 }
