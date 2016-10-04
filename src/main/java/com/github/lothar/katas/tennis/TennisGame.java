@@ -1,7 +1,6 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.Score.FOURTY;
-import static java.util.stream.Collectors.joining;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,16 +16,8 @@ public class TennisGame {
         players.put(player2, new Player(player2));
     }
 
-    public String getScores() {
-        String games = players.values().stream() //
-                .map(player -> player.getGamesWon()) //
-                .map(gamesWon -> String.valueOf(gamesWon)) //
-                .collect(joining("-"));
-        String scores = players.values().stream() //
-                .map(player -> player.getScore()) //
-                .map(score -> String.valueOf(score)) // 1
-                .collect(joining("-"));
-        return games + " ; " + scores;
+    public String getScoreBoard() {
+        return new ScoreBoard(players.values()).toString();
     }
 
     public Score getScore(String player) {

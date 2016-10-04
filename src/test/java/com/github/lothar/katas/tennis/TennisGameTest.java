@@ -20,7 +20,10 @@ public class TennisGameTest {
     public void should_both_players_have_0_points_when_game_starts() {
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 0-0");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 0     |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     @Test
@@ -29,7 +32,10 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 15-0");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 15    |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     @Test
@@ -38,7 +44,10 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
         assertThat(tennisGame.getScore(player2)).isEqualTo(FIFTEEN);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 0-15");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 0     |\n" + //
+                "| Ivan Lendl   | 0   | 15    |\n");
     }
 
     @Test
@@ -48,7 +57,10 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(FIFTEEN);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 15-15");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 15    |\n" + //
+                "| Ivan Lendl   | 0   | 15    |\n");
     }
 
     @Test
@@ -57,7 +69,10 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(THIRTY);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 30-0");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 30    |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     @Test
@@ -66,7 +81,10 @@ public class TennisGameTest {
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTY);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 40-0");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 40    |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     @Test
@@ -77,7 +95,10 @@ public class TennisGameTest {
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(1);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
-        assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 1   | 0     |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     @Test
@@ -90,7 +111,10 @@ public class TennisGameTest {
         assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTY);
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; ADV-40");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | ADV   |\n" + //
+                "| Ivan Lendl   | 0   | 40    |\n");
     }
 
     @Test
@@ -104,7 +128,10 @@ public class TennisGameTest {
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(1);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
-        assertThat(tennisGame.getScores()).isEqualTo("1-0 ; 0-0");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 1   | 0     |\n" + //
+                "| Ivan Lendl   | 0   | 0     |\n");
     }
 
     @Test
@@ -118,7 +145,10 @@ public class TennisGameTest {
         assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTY);
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
-        assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 40-40");
+        assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                "| Player       | Set | Score |\n" + //
+                "| John McEnroe | 0   | 40    |\n" + //
+                "| Ivan Lendl   | 0   | 40    |\n");
     }
 
     private void repeat(int times, Runnable runnable) {
