@@ -161,7 +161,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(player2).setScore(ZERO);
             tennisGame.scores(player1);
 
-            assertThat(tennisGame.getScore(player1)).isEqualTo(FIFTEEN);
+            assertThat(tennisGame.getScore(player1)).isEqualTo(ZERO);
             assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
             assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
             assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
@@ -169,10 +169,11 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getGamesWonInSet(player2, 1)).isEqualTo(0);
             assertThat(tennisGame.getSetsWon(player1)).isEqualTo(1);
             assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
+            assertThat(tennisGame.getWinner()).isEqualTo(player1);
             assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
-                    "| Player       | Set 1 | Score |\n" + //
-                    "| John McEnroe | 6     | 0     |\n" + //
-                    "| Ivan Lendl   | 0     | 0     |\n");
+                    "| Player       | Set 1 | Result |\n" + //
+                    "| John McEnroe | 6     | WINNER |\n" + //
+                    "| Ivan Lendl   | 0     |        |\n");
         }
     }
 

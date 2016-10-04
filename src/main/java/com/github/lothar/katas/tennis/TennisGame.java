@@ -2,6 +2,7 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.Score.FOURTY;
+import static java.util.Comparator.comparingInt;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,10 @@ public class TennisGame {
     }
 
     public String getScoreBoard() {
-        return new ScoreBoard(players.values(), gameType).toString();
+        return getWinnerPlayer() //
+                .map(p -> (AbstractBoard) new ResultBoard(players.values(), gameType, p)) //
+                .orElse(new ScoreBoard(players.values(), gameType)) //
+                .toString();
     }
 
     public Score getScore(String player) {
@@ -67,6 +71,25 @@ public class TennisGame {
 
     public int getSetsWon(String player) {
         return getPlayer(player).getSetsWon();
+    }
+
+    public String getWinner() {
+        return getWinnerPlayer().map(Player::getName).orElse(null);
+    }
+
+    private Optional<Player> getWinnerPlayer() {
+        if (!isMatchOver()) {
+            return Optional.empty();
+        }
+        return Optional.of(players.values().stream() //
+                .max(comparingInt(Player::getSetsWon)) //
+                .get());
+    }
+
+    private boolean isMatchOver() {
+        return gameType.setCount() == players.values().stream() //
+                .mapToInt(Player::getSetsWon) //
+                .sum();
     }
 
     private interface ScoreCalculator {
