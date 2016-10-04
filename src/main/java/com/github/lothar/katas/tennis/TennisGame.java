@@ -58,28 +58,6 @@ public class TennisGame {
         return getPlayer(player).getGamesWon();
     }
 
-    private void winsGame(Player player) {
-        if (isSetPointFor(player)) {
-            player.incrementGamesWon();
-            player.incrementSetWon();
-            players.values().stream() //
-                    .forEach(p -> p.newSet());
-        } else {
-            player.incrementGamesWon();
-            players.values().stream() //
-                    .forEach(p -> p.newGame());
-        }
-    }
-
-    private boolean isSetPointFor(Player player) {
-        return player.getGamesWon() == 5 && isGamePointFor(player);
-    }
-
-    private boolean isGamePointFor(Player player) {
-        return (!isDeuce() && FOURTY.equals(player.getScore())) //
-                || player.hasAdvantage();
-    }
-
     public int getSetsWon(String player) {
         return getPlayer(player).getSetsWon();
     }
@@ -88,7 +66,7 @@ public class TennisGame {
         void playerScores(Player player);
     }
 
-    private class Normal implements ScoreCalculator {
+    private class Normal extends AbstractScoreCalculator {
         @Override
         public void playerScores(Player player) {
             if (FOURTY.equals(player.getScore())) {
@@ -106,7 +84,7 @@ public class TennisGame {
         }
     }
 
-    private class Advantage implements ScoreCalculator {
+    private class Advantage extends AbstractScoreCalculator {
         private Player playerWithAdvantage;
 
         public Advantage(Player playerWithAdvantage) {
@@ -121,6 +99,30 @@ public class TennisGame {
                 players.values().stream() //
                         .forEach(p -> p.setScore(FOURTY));
             }
+        }
+    }
+
+    private abstract class AbstractScoreCalculator implements ScoreCalculator {
+        protected void winsGame(Player player) {
+            if (isSetPointFor(player)) {
+                player.incrementGamesWon();
+                player.incrementSetWon();
+                players.values().stream() //
+                        .forEach(p -> p.newSet());
+            } else {
+                player.incrementGamesWon();
+                players.values().stream() //
+                        .forEach(p -> p.newGame());
+            }
+        }
+
+        private boolean isSetPointFor(Player player) {
+            return player.getGamesWon() == 5 && isGamePointFor(player);
+        }
+
+        private boolean isGamePointFor(Player player) {
+            return (!isDeuce() && FOURTY.equals(player.getScore())) //
+                    || player.hasAdvantage();
         }
     }
 }
