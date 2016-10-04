@@ -6,7 +6,7 @@ public class TennisGame {
 
     private Player player1;
     private Player player2;
-    private GameState state = new NormalState();
+    private ScoreCalculator scoreCalculator = new Normal();
 
     public TennisGame(Player player1, Player player2) {
         this.player1 = player1;
@@ -24,19 +24,19 @@ public class TennisGame {
     }
 
     public void scores(Player player) {
-        state.scores(player);
+        scoreCalculator.scores(player);
         updateState();
     }
 
     private void updateState() {
         if (isDeuce()) {
-            state = new DeuceState();
+            scoreCalculator = new Deuce();
         } else if (player1.hasAdvantage()) {
-            state = new AdvantageState(player1);
+            scoreCalculator = new Advantage(player1);
         } else if (player2.hasAdvantage()) {
-            state = new AdvantageState(player2);
+            scoreCalculator = new Advantage(player2);
         } else {
-            state = new NormalState();
+            scoreCalculator = new Normal();
         }
     }
 
@@ -55,11 +55,11 @@ public class TennisGame {
         player2.resetScore();
     }
 
-    private interface GameState {
+    private interface ScoreCalculator {
         void scores(Player player);
     }
 
-    private class NormalState implements GameState {
+    private class Normal implements ScoreCalculator {
         @Override
         public void scores(Player player) {
             if (FOURTY.equals(player.getScore())) {
@@ -70,17 +70,17 @@ public class TennisGame {
         }
     }
 
-    private class DeuceState implements GameState {
+    private class Deuce implements ScoreCalculator {
         @Override
         public void scores(Player player) {
             player.incrementScore();
         }
     }
 
-    private class AdvantageState implements GameState {
+    private class Advantage implements ScoreCalculator {
         private Player playerWithAdvantage;
 
-        public AdvantageState(Player playerWithAdvantage) {
+        public Advantage(Player playerWithAdvantage) {
             this.playerWithAdvantage = playerWithAdvantage;
         }
 
