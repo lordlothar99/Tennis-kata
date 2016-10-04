@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class TennisGame {
 
+    public static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     private GameType gameType;
     private Map<String, Player> players = new HashMap<>();
 
@@ -147,7 +148,8 @@ public class TennisGame {
         }
 
         private boolean isSetPointFor(Player player) {
-            return player.getGamesWon() == 5 && isGamePointFor(player);
+            return player.getGamesWon() == (GAMES_COUNT_TO_WIN_A_SET - 1) //
+                    && isGamePointFor(player);
         }
 
         private boolean isGamePointFor(Player player) {
