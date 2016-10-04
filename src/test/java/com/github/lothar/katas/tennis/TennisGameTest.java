@@ -17,7 +17,7 @@ public class TennisGameTest {
     }
 
     @Test
-    public void should_score_be_15_0_when_first_player_wins_one_point() {
+    public void should_score_be_15_0_when_first_player_scored_one_time() {
         tennisGame.player1Scores();
 
         assertThat(tennisGame.getPlayer1Score()).isEqualTo(FIFTEEN);
@@ -26,11 +26,21 @@ public class TennisGameTest {
     }
 
     @Test
-    public void should_score_be_0_15_when_second_player_wins_one_point() {
+    public void should_score_be_0_15_when_second_player_scored_one_time() {
         tennisGame.player2Scores();
 
         assertThat(tennisGame.getPlayer1Score()).isEqualTo(ZERO);
         assertThat(tennisGame.getPlayer2Score()).isEqualTo(FIFTEEN);
         assertThat(tennisGame.getScores()).isEqualTo("0-15");
+    }
+
+    @Test
+    public void should_score_be_15_15_when_both_players_scored_one_time() {
+        tennisGame.player1Scores();
+        tennisGame.player2Scores();
+
+        assertThat(tennisGame.getPlayer1Score()).isEqualTo(FIFTEEN);
+        assertThat(tennisGame.getPlayer2Score()).isEqualTo(FIFTEEN);
+        assertThat(tennisGame.getScores()).isEqualTo("15-15");
     }
 }
