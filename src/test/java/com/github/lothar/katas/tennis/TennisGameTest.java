@@ -24,4 +24,13 @@ public class TennisGameTest {
         assertThat(tennisGame.getPlayer2Score()).isEqualTo(ZERO);
         assertThat(tennisGame.getScores()).isEqualTo("15-0");
     }
+
+    @Test
+    public void should_score_be_0_15_when_second_player_wins_one_point() {
+        tennisGame.player2Scores();
+
+        assertThat(tennisGame.getPlayer1Score()).isEqualTo(ZERO);
+        assertThat(tennisGame.getPlayer2Score()).isEqualTo(FIFTEEN);
+        assertThat(tennisGame.getScores()).isEqualTo("0-15");
+    }
 }

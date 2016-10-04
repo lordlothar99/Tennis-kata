@@ -17,6 +17,10 @@ public class TennisGame {
         player1Score = Score.FIFTEEN;
     }
 
+    public void player2Scores() {
+        player2Score = Score.FIFTEEN;
+    }
+
     public String getScores() {
         return player1Score + "-" + player2Score;
     }
