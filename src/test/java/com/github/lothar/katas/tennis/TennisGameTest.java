@@ -2,8 +2,8 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
 import static com.github.lothar.katas.tennis.Score.FIFTEEN;
-import static com.github.lothar.katas.tennis.Score.FOURTEEN;
-import static com.github.lothar.katas.tennis.Score.THIRTEEN;
+import static com.github.lothar.katas.tennis.Score.FOURTY;
+import static com.github.lothar.katas.tennis.Score.THIRTY;
 import static com.github.lothar.katas.tennis.Score.ZERO;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,7 +55,7 @@ public class TennisGameTest {
     public void should_score_be_30_0_when_first_player_scored_two_times() {
         repeat(2, () -> tennisGame.scores(player1));
 
-        assertThat(tennisGame.getScore(player1)).isEqualTo(THIRTEEN);
+        assertThat(tennisGame.getScore(player1)).isEqualTo(THIRTY);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
         assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 30-0");
     }
@@ -64,7 +64,7 @@ public class TennisGameTest {
     public void should_score_be_40_0_when_first_player_scored_three_times() {
         repeat(3, () -> tennisGame.scores(player1));
 
-        assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTEEN);
+        assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTY);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
         assertThat(tennisGame.getScores()).isEqualTo("0-0 ; 40-0");
     }
@@ -87,7 +87,7 @@ public class TennisGameTest {
         tennisGame.scores(player1);
 
         assertThat(tennisGame.getScore(player1)).isEqualTo(ADVANTAGE);
-        assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTEEN);
+        assertThat(tennisGame.getScore(player2)).isEqualTo(FOURTY);
         assertThat(tennisGame.getGamesWon(player1)).isEqualTo(0);
         assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
         assertThat(tennisGame.getScores()).isEqualTo("0-0 ; ADV-40");
