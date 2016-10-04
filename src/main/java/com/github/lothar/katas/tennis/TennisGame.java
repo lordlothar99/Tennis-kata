@@ -10,7 +10,7 @@ public class TennisGame {
         this.player2 = player2;
     }
 
-    public String getScores() {
+    public String getFullScores() {
         return player1.getScore() + "-" + player2.getScore();
     }
 
