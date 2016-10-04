@@ -1,6 +1,7 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.Score.FIFTEEN;
+import static com.github.lothar.katas.tennis.Score.FOURTEEN;
 import static com.github.lothar.katas.tennis.Score.THIRTEEN;
 import static com.github.lothar.katas.tennis.Score.ZERO;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,5 +56,16 @@ public class TennisGameTest {
         assertThat(tennisGame.getScore(player1)).isEqualTo(THIRTEEN);
         assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
         assertThat(tennisGame.getScores()).isEqualTo("30-0");
+    }
+
+    @Test
+    public void should_score_be_40_0_when_first_player_scored_three_times() {
+        tennisGame.scores(player1);
+        tennisGame.scores(player1);
+        tennisGame.scores(player1);
+
+        assertThat(tennisGame.getScore(player1)).isEqualTo(FOURTEEN);
+        assertThat(tennisGame.getScore(player2)).isEqualTo(ZERO);
+        assertThat(tennisGame.getScores()).isEqualTo("40-0");
     }
 }

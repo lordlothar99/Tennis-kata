@@ -16,6 +16,12 @@ public enum Score {
     THIRTEEN("30") {
         @Override
         public Score next() {
+            return FOURTEEN;
+        }
+    },
+    FOURTEEN("40") {
+        @Override
+        public Score next() {
             return null;
         }
     };
