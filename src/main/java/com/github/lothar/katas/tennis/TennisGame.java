@@ -6,6 +6,7 @@ import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
+import com.github.lothar.katas.tennis.exception.MatchIsOverException;
 import com.github.lothar.katas.tennis.score.Score;
 
 public class TennisGame {

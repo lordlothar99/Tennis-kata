@@ -12,6 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
+import com.github.lothar.katas.tennis.exception.MatchIsOverException;
 import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 public abstract class TennisGameTest {
