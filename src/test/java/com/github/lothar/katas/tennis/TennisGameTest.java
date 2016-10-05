@@ -260,6 +260,20 @@ public abstract class TennisGameTest {
         }
     }
 
+    public static class TieBreak extends TennisGameTest {
+        private TennisGame tennisGame = new TennisGame(player1, player2, ONE_SET);
+
+        @Test
+        public void should_there_be_a_tie_break_when_both_players_have_6_games_in_last_set() {
+            tennisGame.getPlayer(player1).setGamesWon(6);
+            tennisGame.getPlayer(player2).setGamesWon(6);
+            tennisGame.getPlayer(player1).setScore(ZERO);
+            tennisGame.getPlayer(player2).setScore(ZERO);
+
+            assertThat(tennisGame.isTieBreak()).isTrue();
+        }
+    }
+
     protected static void repeat(int times, Runnable runnable) {
         range(0, times).forEach(i -> runnable.run());
     }
