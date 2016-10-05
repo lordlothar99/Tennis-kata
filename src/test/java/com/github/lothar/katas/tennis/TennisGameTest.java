@@ -164,6 +164,11 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(0);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
 
             tennisGame.scores(johnMcEnroe);
 
@@ -173,18 +178,24 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getGamesWon(ivanLendl)).isEqualTo(0);
             assertThat(tennisGame.getGamesWonInSet(johnMcEnroe, 1)).isEqualTo(6);
             assertThat(tennisGame.getGamesWonInSet(ivanLendl, 1)).isEqualTo(0);
-            assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(1);
+            assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(2);
             assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
             assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
             assertThat(tennisGame.isMatchOver()).isTrue();
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Result |\n" + //
-                    "| John McEnroe | 6     | WINNER |\n" + //
-                    "| Ivan Lendl   | 0     |        |\n");
+                    "| Player       | Set 1 | Set 2 | Result |\n" + //
+                    "| John McEnroe | 6     | 6     | WINNER |\n" + //
+                    "| Ivan Lendl   | 0     | 0     |        |\n");
         }
 
         @Test(expected = MatchIsOverException.class)
         public void should_referee_protest_when_players_still_play_but_match_is_over() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
             tennisGame.getPlayer(ivanLendl).setGamesWon(0);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
@@ -217,9 +228,9 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(1);
             assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
-                    "| John McEnroe | 6     | 0     | 0     | 15    |\n" + //
-                    "| Ivan Lendl   | 0     | 0     | 0     | 0     |\n");
+                    "| Player       | Set 1 | Set 2 | Score |\n" + //
+                    "| John McEnroe | 6     | 0     | 15    |\n" + //
+                    "| Ivan Lendl   | 0     | 0     | 0     |\n");
         }
     }
 
@@ -244,9 +255,9 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
             assertThat(tennisGame.getWinnerName()).isNull();
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
-                    "| John McEnroe | 6     | 0     | 0     | 15    |\n" + //
-                    "| Ivan Lendl   | 5     | 0     | 0     | 0     |\n");
+                    "| Player       | Set 1 | Score |\n" + //
+                    "| John McEnroe | 6     | 15    |\n" + //
+                    "| Ivan Lendl   | 5     | 0     |\n");
         }
 
         @Test
@@ -265,9 +276,9 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(1);
             assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
-                    "| John McEnroe | 9     | 0     | 0     | 0     |\n" + //
-                    "| Ivan Lendl   | 7     | 0     | 0     | 0     |\n");
+                    "| Player       | Set 1 | Set 2 | Score |\n" + //
+                    "| John McEnroe | 9     | 0     | 0     |\n" + //
+                    "| Ivan Lendl   | 7     | 0     | 0     |\n");
         }
     }
 

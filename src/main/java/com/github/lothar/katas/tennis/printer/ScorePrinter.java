@@ -9,7 +9,6 @@ import static java.util.stream.IntStream.rangeClosed;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.lothar.katas.tennis.SetsToWin;
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
 
