@@ -128,6 +128,7 @@ public abstract class TennisGameTest {
         public void should_player1_win_the_game_when_he_has_an_advantage_and_he_scores() {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(FOURTY);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(ZERO);
@@ -144,6 +145,7 @@ public abstract class TennisGameTest {
         public void should_players_be_at_deuce_when_player1_had_advantage_but_player2_scores() {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(FOURTY);
+
             tennisGame.scores(ivanLendl);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(FOURTY);
@@ -162,6 +164,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(0);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(ZERO);
@@ -186,6 +189,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
             tennisGame.scores(johnMcEnroe);
+
             tennisGame.scores(johnMcEnroe);
         }
     }
@@ -200,6 +204,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
             tennisGame.scores(johnMcEnroe);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(FIFTEEN);
@@ -227,6 +232,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
             tennisGame.scores(johnMcEnroe);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(FIFTEEN);
@@ -248,6 +254,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(7);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(ZERO);
@@ -272,6 +279,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(TieBreakScore.ZERO);
@@ -289,6 +297,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(TieBreakScore.ZERO);
             tennisGame.getPlayer(ivanLendl).setScore(TieBreakScore.ZERO);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(new TieBreakScore(1));
@@ -304,6 +313,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(6));
             tennisGame.getPlayer(ivanLendl).setScore(TieBreakScore.ZERO);
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
@@ -319,6 +329,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(6));
             tennisGame.getPlayer(ivanLendl).setScore(new TieBreakScore(6));
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.isMatchOver()).isFalse();
@@ -334,6 +345,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(9));
             tennisGame.getPlayer(ivanLendl).setScore(new TieBreakScore(8));
+
             tennisGame.scores(johnMcEnroe);
 
             assertThat(tennisGame.isMatchOver()).isTrue();
