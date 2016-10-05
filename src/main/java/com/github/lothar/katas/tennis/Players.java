@@ -3,8 +3,6 @@ package com.github.lothar.katas.tennis;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.github.lothar.katas.tennis.score.TieBreakScore;
-
 public class Players {
 
     private Player player1;
@@ -29,10 +27,6 @@ public class Players {
 
     public int getSetsWonSum() {
         return player1.getSetsWon() + player2.getSetsWon();
-    }
-
-    public int tieBreakScore(Player player) {
-        return ((TieBreakScore) player.getScore()).intValue();
     }
 
     public int getSetsCount() {
