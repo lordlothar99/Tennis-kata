@@ -91,4 +91,9 @@ public class TennisGame {
                 .mapToInt(Player::getSetsWon) //
                 .sum();
     }
+
+    public boolean isTieBreak() {
+        return players.values().stream() //
+                .allMatch(p -> p.getGamesWon() == 6);
+    }
 }
