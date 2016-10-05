@@ -11,7 +11,7 @@ public class Players {
 
     private Map<String, Player> players = new LinkedHashMap<>();
 
-    public Players(String player1, String player2) {
+    Players(String player1, String player2) {
         players.put(player1, new Player(player1));
         players.put(player2, new Player(player2));
     }
