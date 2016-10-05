@@ -24,12 +24,12 @@ public class NormalScoreCalculator extends AbstractCalculator {
                         && !FOURTY.equals(opponent(player).getScore());
     }
 
-    protected void winsThePoint(Player player) {
+    protected void winsNormalPoint(Player player) {
         Player opponent = opponent(player);
         if (opponent.hasAdvantage()) {
             opponent.setScore(FOURTY);
         } else {
-            super.winsThePoint(player);
+            super.winsNormalPoint(player);
         }
     }
 }

@@ -29,7 +29,7 @@ public abstract class AbstractCalculator implements ScoreCalculator {
             winsTheGame(player);
 
         } else {
-            winsThePoint(player);
+            winsNormalPoint(player);
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class AbstractCalculator implements ScoreCalculator {
                 .allMatch(p -> p.getGamesWon() == TennisGame.GAMES_COUNT_TO_WIN_A_SET);
     }
 
-    protected void winsThePoint(Player player) {
+    protected void winsNormalPoint(Player player) {
         player.incrementScore();
     }
 
