@@ -68,4 +68,8 @@ public class Players {
     public int getSetsCount() {
         return player1.getSetsCount();
     }
+
+    public Player opponent(Player player) {
+        return player1.equals(player) ? player2 : player1;
+    }
 }

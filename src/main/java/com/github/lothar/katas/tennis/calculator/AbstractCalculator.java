@@ -94,9 +94,7 @@ public class AbstractCalculator implements ScoreCalculator {
     }
 
     protected Player opponent(Player player) {
-        return players.stream() //
-                .filter(p -> !player.equals(p)) //
-                .findFirst().get();
+        return players.opponent(player);
     }
 
 }
