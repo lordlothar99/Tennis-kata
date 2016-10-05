@@ -81,7 +81,7 @@ public class TennisGame {
         return ofNullable(!isMatchOver() ? null : players.playerWithMostSetsWon());
     }
 
-    private boolean isMatchOver() {
+    public boolean isMatchOver() {
         if (isTieBreak()) {
             return players.stream() //
                     .anyMatch(p -> new TieBreakScore(7).equals(p.getScore()));
