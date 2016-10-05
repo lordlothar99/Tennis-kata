@@ -1,5 +1,7 @@
 package com.github.lothar.katas.tennis;
 
+import static java.util.Comparator.comparingInt;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -26,5 +28,11 @@ public class Players {
         return stream() //
                 .filter(Player::hasAdvantage) //
                 .findFirst();
+    }
+
+    public Player playerWithMostSetsWon() {
+        return stream() //
+                .max(comparingInt(Player::getSetsWon)) //
+                .get();
     }
 }
