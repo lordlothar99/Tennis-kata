@@ -112,7 +112,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_player1_have_an_advantage_when_scores_is_deuce_and_player1_scores() {
+        public void should_McEnroe_have_an_advantage_when_scores_is_deuce_and_McEnroe_scores() {
             repeat(3, () -> tennisGame.scores(johnMcEnroe));
             repeat(3, () -> tennisGame.scores(ivanLendl));
             tennisGame.scores(johnMcEnroe);
@@ -128,7 +128,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_player1_win_the_game_when_he_has_an_advantage_and_he_scores() {
+        public void should_McEnroe_win_the_game_when_he_has_an_advantage_and_he_scores() {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(FOURTY);
 
@@ -145,7 +145,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_players_be_at_deuce_when_player1_had_advantage_but_player2_scores() {
+        public void should_players_be_at_deuce_when_McEnroe_had_advantage_but_Lendl_scores() {
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
             tennisGame.getPlayer(ivanLendl).setScore(FOURTY);
 
@@ -162,7 +162,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_player1_win_the_match_when_he_scores_in_last_game_of_the_set() {
+        public void should_McEnroe_win_the_match_when_he_scores_in_last_game_of_the_set() {
             setWonBy(johnMcEnroe, 6, 0);
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
             tennisGame.getPlayer(ivanLendl).setGamesWon(0);
@@ -200,7 +200,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_player1_win_the_match_when_he_won_2_sets_and_Lendl_only_1() {
+        public void should_McEnroe_win_the_match_when_he_won_2_sets_and_Lendl_only_1() {
             setWonBy(johnMcEnroe, 6, 0);
             setWonBy(ivanLendl, 0, 6);
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
@@ -233,7 +233,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_player1_win_the_set_when_he_scores_in_last_game_of_the_set() {
+        public void should_McEnroe_win_the_set_when_he_scores_in_last_game_of_the_set() {
             setWonBy(johnMcEnroe, 6, 0);
 
             tennisGame.scores(johnMcEnroe);
