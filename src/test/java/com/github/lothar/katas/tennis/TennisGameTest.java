@@ -214,11 +214,11 @@ public abstract class TennisGameTest {
         }
     }
 
-    public static class CommonRules extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(player1, player2, ONE_SET);
+    public static class TwoGamesOfDifference extends TennisGameTest {
+        private TennisGame tennisGame = new TennisGame(player1, player2, THREE_SETS);
 
         @Test
-        public void should_set_still_continue_when_not_two_games_of_difference_in_one_set() {
+        public void should_set_still_continue_when_not_two_games_of_difference() {
             tennisGame.getPlayer(player1).setGamesWon(5);
             tennisGame.getPlayer(player2).setGamesWon(5);
             tennisGame.getPlayer(player1).setScore(ADVANTAGE);
@@ -234,9 +234,9 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
             assertThat(tennisGame.getWinner()).isNull();
             assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
-                    "| Player       | Set 1 | Score |\n" + //
-                    "| John McEnroe | 6     | 15    |\n" + //
-                    "| Ivan Lendl   | 5     | 0     |\n");
+                    "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
+                    "| John McEnroe | 6     | 0     | 0     | 15    |\n" + //
+                    "| Ivan Lendl   | 5     | 0     | 0     | 0     |\n");
         }
 
         @Test
@@ -253,11 +253,10 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getGamesWon(player2)).isEqualTo(0);
             assertThat(tennisGame.getSetsWon(player1)).isEqualTo(1);
             assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
-            assertThat(tennisGame.getWinner()).isEqualTo(player1);
             assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
-                    "| Player       | Set 1 | Result |\n" + //
-                    "| John McEnroe | 9     | WINNER |\n" + //
-                    "| Ivan Lendl   | 7     |        |\n");
+                    "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
+                    "| John McEnroe | 9     | 0     | 0     | 0     |\n" + //
+                    "| Ivan Lendl   | 7     | 0     | 0     | 0     |\n");
         }
     }
 
