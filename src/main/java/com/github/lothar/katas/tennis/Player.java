@@ -1,5 +1,6 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
 import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 import static com.github.lothar.katas.tennis.score.NormalScore.ZERO;
@@ -58,11 +59,7 @@ public class Player {
     }
 
     public int getGamesWonInSet(int set) {
-        if (gamesWonBySet.size() < set) {
-            return 0;
-        } else {
-            return gamesWonBySet.get(set - 1);
-        }
+        return gamesWonBySet.size() < set ? 0 : gamesWonBySet.get(set - 1);
     }
 
     public int getSetsWon() {
@@ -82,7 +79,7 @@ public class Player {
     }
 
     public boolean hasWonAtLeastFiveGames() {
-        return getGamesWon() >= (TennisGame.GAMES_COUNT_TO_WIN_A_SET - 1);
+        return getGamesWon() >= (GAMES_COUNT_TO_WIN_A_SET - 1);
     }
 
     public boolean hasAtLeastOneGameMoreThan(Player opponent) {
