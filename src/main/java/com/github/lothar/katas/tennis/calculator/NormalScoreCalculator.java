@@ -12,6 +12,11 @@ public class NormalScoreCalculator extends AbstractCalculator {
         super(players, setsToWin);
     }
 
+    protected boolean isSetPointFor(Player player) {
+        return super.isSetPointFor(player) //
+                && player.getGamesWon() > opponent(player).getGamesWon(); //
+    }
+
     protected boolean isGamePointFor(Player player) {
         return player.hasAdvantage() //
                 || FOURTY.equals(player.getScore()) //
