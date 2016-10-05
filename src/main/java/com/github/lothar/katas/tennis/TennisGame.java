@@ -21,22 +21,6 @@ public class TennisGame {
         players = new Players(player1Name, player2Name);
     }
 
-    public String toString() {
-        return new ScorePrinter(players, getWinner()).toString();
-    }
-
-    public Score getScore(String playerName) {
-        return getPlayer(playerName).getScore();
-    }
-
-    public int getGamesWonInSet(String playerName, int set) {
-        return getPlayer(playerName).getGamesWonInSet(set);
-    }
-
-    Player getPlayer(String playerName) {
-        return players.get(playerName);
-    }
-
     public void scores(String playerName) {
         if (isMatchOver()) {
             throw new MatchIsOverException();
@@ -52,12 +36,24 @@ public class TennisGame {
         }
     }
 
+    public Score getScore(String playerName) {
+        return getPlayer(playerName).getScore();
+    }
+
+    public int getGamesWonInSet(String playerName, int set) {
+        return getPlayer(playerName).getGamesWonInSet(set);
+    }
+
     public int getGamesWon(String playerName) {
         return getPlayer(playerName).getGamesWon();
     }
 
     public int getSetsWon(String playerName) {
         return getPlayer(playerName).getSetsWon();
+    }
+
+    Player getPlayer(String playerName) {
+        return players.get(playerName);
     }
 
     public String getWinnerName() {
@@ -74,5 +70,9 @@ public class TennisGame {
 
     public boolean isTieBreak() {
         return players.areInTieBreak();
+    }
+
+    public String toString() {
+        return new ScorePrinter(players, getWinner()).toString();
     }
 }
