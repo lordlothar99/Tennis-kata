@@ -1,7 +1,6 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.SetsToWin.THREE;
-import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
@@ -18,10 +17,6 @@ public class TennisGame {
     public static final int MIN_POINTS_TO_WIN_TIE_BREAK = 7;
     private SetsToWin setsToWin;
     private Players players;
-
-    public TennisGame(String player1Name, String player2Name) {
-        this(player1Name, player2Name, THREE);
-    }
 
     public TennisGame(String player1Name, String player2Name, SetsToWin gameType) {
         this.setsToWin = gameType;

@@ -59,7 +59,7 @@ public class Player {
     }
 
     public int getGamesWonInSet(int set) {
-        return getSetsCount() < set ? 0 : gamesWonBySet.get(set - 1);
+        return gamesWonBySet.get(set - 1);
     }
 
     public int getSetsCount() {
