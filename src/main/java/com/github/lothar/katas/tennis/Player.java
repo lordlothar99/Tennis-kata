@@ -2,7 +2,6 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
 import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
-import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 import static com.github.lothar.katas.tennis.score.NormalScore.ZERO;
 
 import java.util.Stack;
@@ -16,6 +15,7 @@ public class Player {
     private Stack<Integer> gamesWonBySet = new Stack<>();
     private int setsWon;
     private String name;
+    private boolean winner;
 
     Player(String name) {
         this.name = name;
@@ -90,8 +90,7 @@ public class Player {
         return getGamesWon() > opponent.getGamesWon();
     }
 
-    public boolean isGamePoint() {
-        return FOURTY.equals(score) //
-                || hasAdvantage();
+    public void setWinner() {
+        this.winner = true;
     }
 }

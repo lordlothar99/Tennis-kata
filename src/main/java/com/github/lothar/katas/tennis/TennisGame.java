@@ -1,15 +1,13 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.SetsToWin.THREE;
-import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
-import com.github.lothar.katas.tennis.calculator.Advantage;
-import com.github.lothar.katas.tennis.calculator.Deuce;
-import com.github.lothar.katas.tennis.calculator.Normal;
+import com.github.lothar.katas.tennis.calculator.NormalScoreCalculator;
 import com.github.lothar.katas.tennis.calculator.ScoreCalculator;
+import com.github.lothar.katas.tennis.calculator.TieBreakScoreCalculator;
 import com.github.lothar.katas.tennis.exception.MatchIsOverException;
 import com.github.lothar.katas.tennis.printer.ScorePrinter;
 import com.github.lothar.katas.tennis.score.Score;
@@ -18,7 +16,7 @@ public class TennisGame {
 
     public static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     public static final int MIN_POINTS_TO_WIN_TIE_BREAK = 7;
-    private SetsToWin gameType;
+    private SetsToWin setsToWin;
     private Players players;
 
     public TennisGame(String player1Name, String player2Name) {
@@ -26,7 +24,7 @@ public class TennisGame {
     }
 
     public TennisGame(String player1Name, String player2Name, SetsToWin gameType) {
-        this.gameType = gameType;
+        this.setsToWin = gameType;
         players = new Players(player1Name, player2Name);
     }
 
@@ -54,15 +52,11 @@ public class TennisGame {
     }
 
     private ScoreCalculator scoreCalculator() {
-        return isDeuce() ? new Deuce() //
-                : players.playerWithAdvantage() //
-                        .map(p -> (ScoreCalculator) new Advantage(players, p)) //
-                        .orElse(new Normal(players));
-    }
-
-    private boolean isDeuce() {
-        return players.stream() //
-                .allMatch(p -> FOURTY.equals(p.getScore()));
+        if (isTieBreak()) {
+            return new TieBreakScoreCalculator(players, setsToWin);
+        } else {
+            return new NormalScoreCalculator(players, setsToWin);
+        }
     }
 
     public int getGamesWon(String playerName) {
@@ -85,7 +79,7 @@ public class TennisGame {
         return isTieBreak() //
                 && players.haveAtLeast2PointsOfDifferenceInTieBreak() //
                 && players.existPlayerWithEnoughPointsToWinTieBreak() //
-                || gameType.intValue() == players.getSetsWonSum();
+                || setsToWin.intValue() == players.getSetsWonSum();
     }
 
     public boolean isTieBreak() {

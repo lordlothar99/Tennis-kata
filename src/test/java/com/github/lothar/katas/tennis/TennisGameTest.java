@@ -20,7 +20,7 @@ public abstract class TennisGameTest {
     protected String johnMcEnroe = "John McEnroe";
     protected String ivanLendl = "Ivan Lendl";
 
-    public static class OneSet extends TennisGameTest {
+    public static class MatchInTwoSets extends TennisGameTest {
         private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
 
         @Test
@@ -174,7 +174,7 @@ public abstract class TennisGameTest {
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(ZERO);
             assertThat(tennisGame.getScore(ivanLendl)).isEqualTo(ZERO);
-            assertThat(tennisGame.getGamesWon(johnMcEnroe)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWon(johnMcEnroe)).isEqualTo(6);
             assertThat(tennisGame.getGamesWon(ivanLendl)).isEqualTo(0);
             assertThat(tennisGame.getGamesWonInSet(johnMcEnroe, 1)).isEqualTo(6);
             assertThat(tennisGame.getGamesWonInSet(ivanLendl, 1)).isEqualTo(0);
@@ -206,7 +206,7 @@ public abstract class TennisGameTest {
         }
     }
 
-    public static class ThreeSets extends TennisGameTest {
+    public static class MatchInThreeSets extends TennisGameTest {
         private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
 
         @Test
@@ -305,6 +305,12 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_points_be_classic_ordinal_when_there_is_a_tie_break() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(TieBreakScore.ZERO);
@@ -314,13 +320,19 @@ public abstract class TennisGameTest {
 
             assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(new TieBreakScore(1));
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Score |\n" + //
-                    "| John McEnroe | 6     | 1     |\n" + //
-                    "| Ivan Lendl   | 6     | 0     |\n");
+                    "| Player       | Set 1 | Set 2 | Score |\n" + //
+                    "| John McEnroe | 6     | 6     | 1     |\n" + //
+                    "| Ivan Lendl   | 4     | 6     | 0     |\n");
         }
 
         @Test
         public void should_match_be_won_when_one_player_wins_7_points_in_tie_break() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(6));
@@ -331,13 +343,19 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.isMatchOver()).isTrue();
             assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Result |\n" + //
-                    "| John McEnroe | 6     | WINNER |\n" + //
-                    "| Ivan Lendl   | 6     |        |\n");
+                    "| Player       | Set 1 | Set 2 | Result |\n" + //
+                    "| John McEnroe | 6     | 7     | WINNER |\n" + //
+                    "| Ivan Lendl   | 4     | 6     |        |\n");
         }
 
         @Test
         public void should_match_still_continue_after_7_when_there_are_less_than_2_points_of_difference_in_tie_break() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(6));
@@ -347,13 +365,19 @@ public abstract class TennisGameTest {
 
             assertThat(tennisGame.isMatchOver()).isFalse();
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Score |\n" + //
-                    "| John McEnroe | 6     | 7     |\n" + //
-                    "| Ivan Lendl   | 6     | 6     |\n");
+                    "| Player       | Set 1 | Set 2 | Score |\n" + //
+                    "| John McEnroe | 6     | 6     | 7     |\n" + //
+                    "| Ivan Lendl   | 4     | 6     | 6     |\n");
         }
 
         @Test
         public void should_match_be_won_when_there_are_at_least_2_points_of_difference_above_7_in_tie_break() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(9));
@@ -364,9 +388,9 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.isMatchOver()).isTrue();
             assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
             assertThat(tennisGame.toString()).isEqualTo("" + //
-                    "| Player       | Set 1 | Result |\n" + //
-                    "| John McEnroe | 6     | WINNER |\n" + //
-                    "| Ivan Lendl   | 6     |        |\n");
+                    "| Player       | Set 1 | Set 2 | Result |\n" + //
+                    "| John McEnroe | 6     | 7     | WINNER |\n" + //
+                    "| Ivan Lendl   | 4     | 6     |        |\n");
         }
     }
 

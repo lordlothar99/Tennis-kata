@@ -61,7 +61,7 @@ public class Players {
                 .anyMatch(p -> tieBreakScore(p) >= MIN_POINTS_TO_WIN_TIE_BREAK);
     }
 
-    private int tieBreakScore(Player player) {
+    public int tieBreakScore(Player player) {
         return ((TieBreakScore) player.getScore()).intValue();
     }
 
