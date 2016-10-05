@@ -53,4 +53,16 @@ public class Players {
         return player1.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET //
                 && player2.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET;
     }
+
+    public void setupTieBreak() {
+        stream().forEach(Player::setupTieBreak);
+    }
+
+    public void resetScore() {
+        stream().forEach(Player::resetScore);
+    }
+
+    public void setupNewSet() {
+        stream().forEach(Player::setupNewSet);
+    }
 }

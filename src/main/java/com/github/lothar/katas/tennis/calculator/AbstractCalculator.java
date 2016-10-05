@@ -41,7 +41,7 @@ public abstract class AbstractCalculator implements ScoreCalculator {
         player.incrementGamesWon();
         player.incrementSetWon();
         player.setWinner();
-        players.stream().forEach(Player::resetScore);
+        players.resetScore();
     }
 
     protected boolean isSetPointFor(Player player) {
@@ -52,8 +52,8 @@ public abstract class AbstractCalculator implements ScoreCalculator {
     private void winsTheSet(Player player) {
         player.incrementGamesWon();
         player.incrementSetWon();
-        players.stream().forEach(Player::setupNewSet);
-        players.stream().forEach(Player::resetScore);
+        players.setupNewSet();
+        players.resetScore();
     }
 
     protected abstract boolean isGamePointFor(Player player);
@@ -61,9 +61,9 @@ public abstract class AbstractCalculator implements ScoreCalculator {
     private void winsTheGame(Player player) {
         player.incrementGamesWon();
         if (players.areInTieBreak()) {
-            players.stream().forEach(Player::setupTieBreak);
+            players.setupTieBreak();
         } else {
-            players.stream().forEach(Player::resetScore);
+            players.resetScore();
         }
     }
 
