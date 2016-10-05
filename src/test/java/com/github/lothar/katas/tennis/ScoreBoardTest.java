@@ -13,6 +13,8 @@ import java.util.Optional;
 
 import org.junit.Test;
 
+import com.github.lothar.katas.tennis.printer.ScorePrinter;
+
 public class ScoreBoardTest {
 
     private Players players = new Players("John", "Bob");

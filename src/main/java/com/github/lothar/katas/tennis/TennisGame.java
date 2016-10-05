@@ -11,6 +11,7 @@ import com.github.lothar.katas.tennis.calculator.Deuce;
 import com.github.lothar.katas.tennis.calculator.Normal;
 import com.github.lothar.katas.tennis.calculator.ScoreCalculator;
 import com.github.lothar.katas.tennis.exception.MatchIsOverException;
+import com.github.lothar.katas.tennis.printer.ScorePrinter;
 import com.github.lothar.katas.tennis.score.Score;
 
 public class TennisGame {

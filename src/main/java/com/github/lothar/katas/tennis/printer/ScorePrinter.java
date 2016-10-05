@@ -1,4 +1,4 @@
-package com.github.lothar.katas.tennis;
+package com.github.lothar.katas.tennis.printer;
 
 import static java.lang.Math.max;
 import static java.util.stream.Collectors.joining;
@@ -9,7 +9,11 @@ import static java.util.stream.IntStream.rangeClosed;
 import java.util.List;
 import java.util.Optional;
 
-class ScorePrinter {
+import com.github.lothar.katas.tennis.GameType;
+import com.github.lothar.katas.tennis.Player;
+import com.github.lothar.katas.tennis.Players;
+
+public class ScorePrinter {
 
     private static final String PLAYER_COLUMN = "Player";
     private static final int PLAYER_COLUMN_LENGTH = PLAYER_COLUMN.length();
