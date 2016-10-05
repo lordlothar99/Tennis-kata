@@ -83,8 +83,8 @@ public class TennisGame {
 
     public boolean isMatchOver() {
         if (isTieBreak()) {
-            return players.stream() //
-                    .anyMatch(p -> new TieBreakScore(7).equals(p.getScore()));
+            return players.haveAtLeast2PointsOfDifferenceInTieBreak()
+                    && players.existPlayerWithMoreThan7PointsInTieBreak();
         }
         return gameType.setsCount() == players.getSetsWonSum();
     }

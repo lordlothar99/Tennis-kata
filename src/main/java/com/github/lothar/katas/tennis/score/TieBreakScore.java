@@ -33,4 +33,8 @@ public class TieBreakScore implements Score {
         TieBreakScore score = (TieBreakScore) obj;
         return score.value == value;
     }
+
+    public int intValue() {
+        return value;
+    }
 }

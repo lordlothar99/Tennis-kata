@@ -2,10 +2,14 @@ package com.github.lothar.katas.tennis;
 
 import static java.util.Comparator.comparingInt;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 public class Players {
 
@@ -40,5 +44,20 @@ public class Players {
         return stream() //
                 .mapToInt(Player::getSetsWon) //
                 .sum();
+    }
+
+    public boolean haveAtLeast2PointsOfDifferenceInTieBreak() {
+        List<Player> playersList = new ArrayList<>(players.values());
+        Player player1 = playersList.get(0);
+        Player player2 = playersList.get(1);
+        int player1Score = ((TieBreakScore) player1.getScore()).intValue();
+        int player2Score = ((TieBreakScore) player2.getScore()).intValue();
+        
+        return Math.abs(player2Score - player1Score) >= 2;
+    }
+
+    public boolean existPlayerWithMoreThan7PointsInTieBreak() {
+        return stream() //
+                .anyMatch(p -> new TieBreakScore(7).equals(p.getScore()));
     }
 }
