@@ -57,7 +57,7 @@ public class TennisGame {
 
     private Optional<Player> playerWithAdvantage() {
         return players.values().stream() //
-                .filter(p -> p.hasAdvantage()) //
+                .filter(Player::hasAdvantage) //
                 .findFirst();
     }
 
