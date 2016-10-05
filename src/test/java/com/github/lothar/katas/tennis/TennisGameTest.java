@@ -272,6 +272,17 @@ public abstract class TennisGameTest {
 
             assertThat(tennisGame.isTieBreak()).isTrue();
         }
+
+        @Test
+        public void should_points_be_classic_oridnal_when_there_is_a_tie_break() {
+            tennisGame.getPlayer(player1).setGamesWon(6);
+            tennisGame.getPlayer(player2).setGamesWon(6);
+            tennisGame.getPlayer(player1).setScore(ZERO);
+            tennisGame.getPlayer(player2).setScore(ZERO);
+            tennisGame.scores(player1);
+
+            assertThat(tennisGame.getScore(player1)).isEqualTo(1);
+        }
     }
 
     protected static void repeat(int times, Runnable runnable) {
