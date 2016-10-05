@@ -327,6 +327,21 @@ public abstract class TennisGameTest {
                     "| John McEnroe | 6     | 7     |\n" + //
                     "| Ivan Lendl   | 6     | 6     |\n");
         }
+
+        @Test
+        public void should_match_be_won_when_there_are_at_least_2_points_of_difference_above_7_in_tie_break() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(6);
+            tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(9));
+            tennisGame.getPlayer(ivanLendl).setScore(new TieBreakScore(8));
+            tennisGame.scores(johnMcEnroe);
+
+            assertThat(tennisGame.isMatchOver()).isTrue();
+            assertThat(tennisGame.toString()).isEqualTo("" + //
+                    "| Player       | Set 1 | Result |\n" + //
+                    "| John McEnroe | 6     | WINNER |\n" + //
+                    "| Ivan Lendl   | 6     |        |\n");
+        }
     }
 
     protected static void repeat(int times, Runnable runnable) {
