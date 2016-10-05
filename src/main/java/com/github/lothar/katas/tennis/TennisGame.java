@@ -1,7 +1,5 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.SetsToWin.THREE;
-
 import java.util.Optional;
 
 import com.github.lothar.katas.tennis.calculator.NormalScoreCalculator;
