@@ -49,14 +49,19 @@ public class Players {
     }
 
     public boolean haveAtLeast2PointsOfDifferenceInTieBreak() {
-        int player1Score = ((TieBreakScore) player1.getScore()).intValue();
-        int player2Score = ((TieBreakScore) player2.getScore()).intValue();
+        int player1Score = tieBreakScore(player1).intValue();
+        int player2Score = tieBreakScore(player2).intValue();
 
         return Math.abs(player2Score - player1Score) >= 2;
     }
 
     public boolean existPlayerWithEnoughPointsToWinTieBreak() {
         return stream() //
-                .anyMatch(p -> new TieBreakScore(MIN_POINTS_TO_WIN_TIE_BREAK).equals(p.getScore()));
+                .anyMatch(p -> tieBreakScore(p)
+                        .compareTo(new TieBreakScore(MIN_POINTS_TO_WIN_TIE_BREAK)) >= 0);
+    }
+
+    private TieBreakScore tieBreakScore(Player player) {
+        return (TieBreakScore) player.getScore();
     }
 }
