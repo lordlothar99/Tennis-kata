@@ -17,6 +17,6 @@ public class TieBreakScoreCalculator extends AbstractCalculator {
         int opponentScore = players.tieBreakScore(opponent(player));
 
         return (tieBreakScore + 1) >= MIN_POINTS_TO_WIN_TIE_BREAK
-                && (tieBreakScore + 1 - opponentScore > 1);
+                && tieBreakScore - opponentScore > 0;
     }
 }
