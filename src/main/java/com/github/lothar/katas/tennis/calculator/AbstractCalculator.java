@@ -47,7 +47,7 @@ public abstract class AbstractCalculator implements ScoreCalculator {
 
     protected boolean isSetPointFor(Player player) {
         return isGamePointFor(player) //
-                && player.getGamesWon() + 1 >= GAMES_COUNT_TO_WIN_A_SET; //
+                && player.getGamesWon() + 1 >= GAMES_COUNT_TO_WIN_A_SET;
     }
 
     private void winsTheSet(Player player) {
