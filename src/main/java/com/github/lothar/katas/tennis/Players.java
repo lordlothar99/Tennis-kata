@@ -1,5 +1,7 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
+
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -45,5 +47,10 @@ public class Players {
         } else {
             return Optional.empty();
         }
+    }
+
+    public boolean areInTieBreak() {
+        return player1.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET //
+                && player2.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET;
     }
 }

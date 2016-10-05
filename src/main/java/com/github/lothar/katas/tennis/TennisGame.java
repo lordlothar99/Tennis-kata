@@ -73,7 +73,6 @@ public class TennisGame {
     }
 
     public boolean isTieBreak() {
-        return players.stream() //
-                .allMatch(p -> p.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET);
+        return players.areInTieBreak();
     }
 }

@@ -5,7 +5,6 @@ import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
 import com.github.lothar.katas.tennis.SetsToWin;
-import com.github.lothar.katas.tennis.TennisGame;
 
 public abstract class AbstractCalculator implements ScoreCalculator {
 
@@ -61,16 +60,11 @@ public abstract class AbstractCalculator implements ScoreCalculator {
 
     private void winsTheGame(Player player) {
         player.incrementGamesWon();
-        if (isTieBreak()) {
+        if (players.areInTieBreak()) {
             players.stream().forEach(Player::setupTieBreak);
         } else {
             players.stream().forEach(Player::resetScore);
         }
-    }
-
-    private boolean isTieBreak() {
-        return players.stream() //
-                .allMatch(p -> p.getGamesWon() == TennisGame.GAMES_COUNT_TO_WIN_A_SET);
     }
 
     protected void winsNormalPoint(Player player) {
