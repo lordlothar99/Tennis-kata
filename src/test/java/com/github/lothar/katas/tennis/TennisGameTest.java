@@ -1,7 +1,7 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.SetsToWin.TWO;
 import static com.github.lothar.katas.tennis.SetsToWin.THREE;
+import static com.github.lothar.katas.tennis.SetsToWin.TWO;
 import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
 import static com.github.lothar.katas.tennis.score.NormalScore.FIFTEEN;
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
@@ -19,9 +19,12 @@ public abstract class TennisGameTest {
 
     protected String johnMcEnroe = "John McEnroe";
     protected String ivanLendl = "Ivan Lendl";
+    protected TennisGame tennisGame;
 
     public static class MatchInTwoSets extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
+        public MatchInTwoSets() {
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
+        }
 
         @Test
         public void should_both_players_have_0_points_when_game_starts() {
@@ -160,11 +163,7 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_player1_win_the_match_when_he_scores_in_last_game_of_the_set() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
+            setWonBy(johnMcEnroe, 6, 0);
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
             tennisGame.getPlayer(ivanLendl).setGamesWon(0);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
@@ -190,12 +189,7 @@ public abstract class TennisGameTest {
 
         @Test(expected = MatchIsOverException.class)
         public void should_referee_protest_when_players_still_play_but_match_is_over() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
-
+            setWonBy(johnMcEnroe, 6, 0);
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
             tennisGame.getPlayer(ivanLendl).setGamesWon(0);
             tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
@@ -207,15 +201,13 @@ public abstract class TennisGameTest {
     }
 
     public static class MatchInThreeSets extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+        public MatchInThreeSets() {
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+        }
 
         @Test
         public void should_player1_win_the_set_when_he_scores_in_last_game_of_the_set() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
+            setWonBy(johnMcEnroe, 6, 0);
 
             tennisGame.scores(johnMcEnroe);
 
@@ -235,7 +227,9 @@ public abstract class TennisGameTest {
     }
 
     public static class TwoGamesOfDifference extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+        public TwoGamesOfDifference() {
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+        }
 
         @Test
         public void should_set_still_continue_when_not_two_games_of_difference() {
@@ -283,7 +277,9 @@ public abstract class TennisGameTest {
     }
 
     public static class TieBreak extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
+        public TieBreak() {
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
+        }
 
         @Test
         public void should_there_be_a_tie_break_when_both_players_have_6_games_in_last_set() {
@@ -305,11 +301,7 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_points_be_classic_ordinal_when_there_is_a_tie_break() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
+            setWonBy(johnMcEnroe, 6, 4);
 
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
@@ -327,11 +319,7 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_match_be_won_when_one_player_wins_7_points_in_tie_break() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
+            setWonBy(johnMcEnroe, 6, 4);
 
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
@@ -350,11 +338,7 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_match_still_continue_after_7_when_there_are_less_than_2_points_of_difference_in_tie_break() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
+            setWonBy(johnMcEnroe, 6, 4);
 
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
@@ -372,11 +356,7 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_match_be_won_when_there_are_at_least_2_points_of_difference_above_7_in_tie_break() {
-            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
-            tennisGame.getPlayer(ivanLendl).setGamesWon(4);
-            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
-            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
-            tennisGame.scores(johnMcEnroe);
+            setWonBy(johnMcEnroe, 6, 4);
 
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
@@ -392,6 +372,14 @@ public abstract class TennisGameTest {
                     "| John McEnroe | 6     | 7     | WINNER |\n" + //
                     "| Ivan Lendl   | 4     | 6     |        |\n");
         }
+    }
+
+    protected void setWonBy(String player, int setsJohnMcEnroe, int setsIvanLendl) {
+        tennisGame.getPlayer(johnMcEnroe).setGamesWon(setsJohnMcEnroe);
+        tennisGame.getPlayer(ivanLendl).setGamesWon(setsIvanLendl);
+        tennisGame.getPlayer(player).incrementSetWon();
+        tennisGame.getPlayer(johnMcEnroe).setupNewSet();
+        tennisGame.getPlayer(ivanLendl).setupNewSet();
     }
 
     protected static void repeat(int times, Runnable runnable) {
