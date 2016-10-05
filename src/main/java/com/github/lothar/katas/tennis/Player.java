@@ -93,4 +93,8 @@ public class Player {
     public void setWinner() {
         this.winner = true;
     }
+
+    public boolean isWinner() {
+        return this.winner;
+    }
 }

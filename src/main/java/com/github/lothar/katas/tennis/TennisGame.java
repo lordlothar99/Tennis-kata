@@ -72,14 +72,11 @@ public class TennisGame {
     }
 
     private Optional<Player> getWinner() {
-        return ofNullable(!isMatchOver() ? null : players.playerWithMostSetsWon());
+        return players.getWinner();
     }
 
     public boolean isMatchOver() {
-        return isTieBreak() //
-                && players.haveAtLeast2PointsOfDifferenceInTieBreak() //
-                && players.existPlayerWithEnoughPointsToWinTieBreak() //
-                || setsToWin.intValue() == players.getSetsWonSum();
+        return getWinner().isPresent();
     }
 
     public boolean isTieBreak() {

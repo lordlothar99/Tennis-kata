@@ -44,9 +44,7 @@ public class Players {
     }
 
     public int getSetsWonSum() {
-        return stream() //
-                .mapToInt(Player::getSetsWon) //
-                .sum();
+        return player1.getSetsWon() + player2.getSetsWon();
     }
 
     public boolean haveAtLeast2PointsOfDifferenceInTieBreak() {
@@ -71,5 +69,15 @@ public class Players {
 
     public Player opponent(Player player) {
         return player1.equals(player) ? player2 : player1;
+    }
+
+    public Optional<Player> getWinner() {
+        if (player1.isWinner()) {
+            return Optional.of(player1);
+        } else if (player2.isWinner()) {
+            return Optional.of(player2);
+        } else {
+            return Optional.empty();
+        }
     }
 }
