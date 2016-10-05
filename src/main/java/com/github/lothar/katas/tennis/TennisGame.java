@@ -82,11 +82,10 @@ public class TennisGame {
     }
 
     public boolean isMatchOver() {
-        if (isTieBreak()) {
-            return players.haveAtLeast2PointsOfDifferenceInTieBreak()
-                    && players.existPlayerWithEnoughPointsToWinTieBreak();
-        }
-        return gameType.setsCount() == players.getSetsWonSum();
+        return isTieBreak() //
+                && players.haveAtLeast2PointsOfDifferenceInTieBreak() //
+                && players.existPlayerWithEnoughPointsToWinTieBreak() //
+                || gameType.setsCount() == players.getSetsWonSum();
     }
 
     public boolean isTieBreak() {
