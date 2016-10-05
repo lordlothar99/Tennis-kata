@@ -251,6 +251,77 @@ public abstract class TennisGameTest {
                     "| John McEnroe | 6     | 0     | 15    |\n" + //
                     "| Ivan Lendl   | 0     | 0     | 0     |\n");
         }
+
+        @Test
+        public void should_McEnroe_win_the_match_when_he_won_3_sets_and_Lendl_none() {
+            setWonBy(johnMcEnroe, 6, 0);
+            setWonBy(johnMcEnroe, 6, 0);
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+
+            tennisGame.scores(johnMcEnroe);
+
+            assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(ZERO);
+            assertThat(tennisGame.getScore(ivanLendl)).isEqualTo(ZERO);
+            assertThat(tennisGame.getGamesWon(johnMcEnroe)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWon(ivanLendl)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWonInSet(johnMcEnroe, 1)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWonInSet(ivanLendl, 1)).isEqualTo(0);
+            assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(3);
+            assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
+            assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
+            assertThat(tennisGame.isMatchOver()).isTrue();
+            assertThat(tennisGame.toString()).isEqualTo("" + //
+                    "| Player       | Set 1 | Set 2 | Set 3 | Result |\n" + //
+                    "| John McEnroe | 6     | 6     | 6     | WINNER |\n" + //
+                    "| Ivan Lendl   | 0     | 0     | 0     |        |\n");
+        }
+
+        @Test(expected = MatchIsOverException.class)
+        public void should_referee_protest_when_players_still_play_but_match_is_over() {
+            setWonBy(johnMcEnroe, 6, 0);
+            setWonBy(johnMcEnroe, 6, 0);
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
+            tennisGame.scores(johnMcEnroe);
+        }
+
+        @Test
+        public void should_match_continue_when_McEnro_won_2_sets_and_Lendl_1() {
+            setWonBy(johnMcEnroe, 6, 0);
+            setWonBy(ivanLendl, 0, 6);
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(5);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(0);
+            tennisGame.getPlayer(johnMcEnroe).setScore(ADVANTAGE);
+            tennisGame.getPlayer(ivanLendl).setScore(ZERO);
+            tennisGame.scores(johnMcEnroe);
+
+            tennisGame.scores(johnMcEnroe);
+
+            assertThat(tennisGame.getScore(johnMcEnroe)).isEqualTo(FIFTEEN);
+            assertThat(tennisGame.getScore(ivanLendl)).isEqualTo(ZERO);
+            assertThat(tennisGame.getGamesWon(johnMcEnroe)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWon(ivanLendl)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWonInSet(johnMcEnroe, 1)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWonInSet(ivanLendl, 1)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWonInSet(johnMcEnroe, 2)).isEqualTo(0);
+            assertThat(tennisGame.getGamesWonInSet(ivanLendl, 2)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWonInSet(johnMcEnroe, 3)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWonInSet(ivanLendl, 3)).isEqualTo(0);
+            assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(2);
+            assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(1);
+            assertThat(tennisGame.isMatchOver()).isFalse();
+            assertThat(tennisGame.toString()).isEqualTo("" + //
+                    "| Player       | Set 1 | Set 2 | Set 3 | Set 4 | Score |\n" + //
+                    "| John McEnroe | 6     | 0     | 6     | 0     | 15    |\n" + //
+                    "| Ivan Lendl   | 0     | 6     | 0     | 0     | 0     |\n");
+        }
     }
 
     public static class TwoGamesOfDifference extends TennisGameTest {

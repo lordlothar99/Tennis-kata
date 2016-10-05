@@ -34,7 +34,7 @@ public abstract class AbstractCalculator implements ScoreCalculator {
 
     private boolean isMatchPointFor(Player player) {
         return isSetPointFor(player) && //
-                (players.getSetsWonSum() + 1) >= setsToWin.intValue();
+                (player.getSetsWon() + 1) >= setsToWin.intValue();
     }
 
     private void winsTheMatch(Player player) {
