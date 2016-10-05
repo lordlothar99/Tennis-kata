@@ -21,7 +21,7 @@ public class TennisGame {
         players = new Players(player1, player2);
     }
 
-    public String getScoreBoard() {
+    public String toString() {
         return new ScoreBoard(players, gameType, getWinnerPlayer()).toString();
     }
 
