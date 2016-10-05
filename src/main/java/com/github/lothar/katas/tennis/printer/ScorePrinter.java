@@ -59,11 +59,11 @@ public class ScorePrinter {
     }
 
     private Object lastColumnValue(Player player) {
-        if (winner.isPresent()) {
-            return winner.get().equals(player) ? WINNER : "";
-        } else {
-            return player.getScore();
-        }
+        return winner.isPresent() //
+                ? winner.get().equals(player) //
+                        ? WINNER //
+                        : "" //
+                : player.getScore();
     }
 
     private String line(String player, List<?> sets, Object score) {
