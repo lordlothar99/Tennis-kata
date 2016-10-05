@@ -141,26 +141,26 @@ public class ScoreBoardTest {
     public void should_board_display_scores_when_scores_are_complex_and_five_sets() {
         scoreBoard = new ScoreBoard(asList(player1, player2), FIVE_SETS, Optional.empty());
         player1.setGamesWon(1);
-        player1.newSet();
+        player1.setupNewSet();
         player1.setGamesWon(2);
-        player1.newSet();
+        player1.setupNewSet();
         player1.setGamesWon(3);
-        player1.newSet();
+        player1.setupNewSet();
         player1.setGamesWon(4);
-        player1.newSet();
+        player1.setupNewSet();
         player1.setGamesWon(5);
-        player1.newSet();
+        player1.setupNewSet();
         player1.setScore(FIFTEEN);
         player2.setGamesWon(6);
-        player2.newSet();
+        player2.setupNewSet();
         player2.setGamesWon(7);
-        player2.newSet();
+        player2.setupNewSet();
         player2.setGamesWon(8);
-        player2.newSet();
+        player2.setupNewSet();
         player2.setGamesWon(9);
-        player2.newSet();
+        player2.setupNewSet();
         player2.setGamesWon(10);
-        player2.newSet();
+        player2.setupNewSet();
         player2.setScore(THIRTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //

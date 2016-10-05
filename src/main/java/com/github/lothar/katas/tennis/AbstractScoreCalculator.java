@@ -14,11 +14,11 @@ public abstract class AbstractScoreCalculator implements ScoreCalculator {
     }
 
     protected void winsGame(Player player) {
-        Consumer<Player> newGamePreparer = Player::newGame;
+        Consumer<Player> newGamePreparer = Player::setupNewGame;
 
         if (isSetPointFor(player)) {
             player.incrementSetWon();
-            Consumer<Player> newSetPreparer = Player::newSet;
+            Consumer<Player> newSetPreparer = Player::setupNewSet;
             newGamePreparer = newSetPreparer.andThen(newGamePreparer);
         }
 

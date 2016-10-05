@@ -30,7 +30,7 @@ class Player {
         score = score.next();
     }
 
-    public void newGame() {
+    public void setupNewGame() {
         score = ZERO;
     }
 
@@ -70,7 +70,7 @@ class Player {
         setsWon++;
     }
 
-    public void newSet() {
+    public void setupNewSet() {
         gamesWonBySet.add(0);
     }
 
