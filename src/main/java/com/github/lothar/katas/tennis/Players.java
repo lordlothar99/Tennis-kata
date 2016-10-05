@@ -3,10 +3,6 @@ package com.github.lothar.katas.tennis;
 import static com.github.lothar.katas.tennis.TennisGame.MIN_POINTS_TO_WIN_TIE_BREAK;
 import static java.util.Comparator.comparingInt;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -14,19 +10,20 @@ import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 public class Players {
 
-    private Map<String, Player> players = new LinkedHashMap<>();
+    private Player player1;
+    private Player player2;
 
     Players(String player1, String player2) {
-        players.put(player1, new Player(player1));
-        players.put(player2, new Player(player2));
+        this.player1 = new Player(player1);
+        this.player2 = new Player(player2);
     }
 
     public Stream<Player> stream() {
-        return players.values().stream();
+        return Stream.of(player1, player2);
     }
 
     public Player get(String player) {
-        return players.get(player);
+        return player1.getName().equals(player) ? player1 : player2;
     }
 
     public Optional<Player> playerWithAdvantage() {
@@ -48,9 +45,6 @@ public class Players {
     }
 
     public boolean haveAtLeast2PointsOfDifferenceInTieBreak() {
-        List<Player> playersList = new ArrayList<>(players.values());
-        Player player1 = playersList.get(0);
-        Player player2 = playersList.get(1);
         int player1Score = ((TieBreakScore) player1.getScore()).intValue();
         int player2Score = ((TieBreakScore) player2.getScore()).intValue();
 
