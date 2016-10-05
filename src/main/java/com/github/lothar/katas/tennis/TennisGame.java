@@ -21,36 +21,36 @@ public class TennisGame {
     private GameType gameType;
     private Players players;
 
-    public TennisGame(String player1, String player2) {
-        this(player1, player2, THREE_SETS);
+    public TennisGame(String player1Name, String player2Name) {
+        this(player1Name, player2Name, THREE_SETS);
     }
 
-    public TennisGame(String player1, String player2, GameType gameType) {
+    public TennisGame(String player1Name, String player2Name, GameType gameType) {
         this.gameType = gameType;
-        players = new Players(player1, player2);
+        players = new Players(player1Name, player2Name);
     }
 
     public String toString() {
-        return new ScorePrinter(players, gameType, getWinnerPlayer()).toString();
+        return new ScorePrinter(players, gameType, getWinner()).toString();
     }
 
-    public Score getScore(String player) {
-        return getPlayer(player).getScore();
+    public Score getScore(String playerName) {
+        return getPlayer(playerName).getScore();
     }
 
-    public int getGamesWonInSet(String player, int set) {
-        return getPlayer(player).getGamesWonInSet(set);
+    public int getGamesWonInSet(String playerName, int set) {
+        return getPlayer(playerName).getGamesWonInSet(set);
     }
 
-    Player getPlayer(String player) {
-        return players.get(player);
+    Player getPlayer(String playerName) {
+        return players.get(playerName);
     }
 
-    public void scores(String player) {
+    public void scores(String playerName) {
         if (isMatchOver()) {
             throw new MatchIsOverException();
         }
-        scoreCalculator().playerScores(getPlayer(player));
+        scoreCalculator().playerScores(getPlayer(playerName));
     }
 
     private ScoreCalculator scoreCalculator() {
@@ -65,19 +65,19 @@ public class TennisGame {
                 .allMatch(p -> FOURTY.equals(p.getScore()));
     }
 
-    public int getGamesWon(String player) {
-        return getPlayer(player).getGamesWon();
+    public int getGamesWon(String playerName) {
+        return getPlayer(playerName).getGamesWon();
     }
 
-    public int getSetsWon(String player) {
-        return getPlayer(player).getSetsWon();
+    public int getSetsWon(String playerName) {
+        return getPlayer(playerName).getSetsWon();
     }
 
-    public String getWinner() {
-        return getWinnerPlayer().map(Player::getName).orElse(null);
+    public String getWinnerName() {
+        return getWinner().map(Player::getName).orElse(null);
     }
 
-    private Optional<Player> getWinnerPlayer() {
+    private Optional<Player> getWinner() {
         return ofNullable(!isMatchOver() ? null : players.playerWithMostSetsWon());
     }
 

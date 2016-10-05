@@ -172,7 +172,7 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getGamesWonInSet(ivanLendl, 1)).isEqualTo(0);
             assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(1);
             assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
-            assertThat(tennisGame.getWinner()).isEqualTo(johnMcEnroe);
+            assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
             assertThat(tennisGame.toString()).isEqualTo("" + //
                     "| Player       | Set 1 | Result |\n" + //
                     "| John McEnroe | 6     | WINNER |\n" + //
@@ -235,7 +235,7 @@ public abstract class TennisGameTest {
             assertThat(tennisGame.getGamesWon(ivanLendl)).isEqualTo(5);
             assertThat(tennisGame.getSetsWon(johnMcEnroe)).isEqualTo(0);
             assertThat(tennisGame.getSetsWon(ivanLendl)).isEqualTo(0);
-            assertThat(tennisGame.getWinner()).isNull();
+            assertThat(tennisGame.getWinnerName()).isNull();
             assertThat(tennisGame.toString()).isEqualTo("" + //
                     "| Player       | Set 1 | Set 2 | Set 3 | Score |\n" + //
                     "| John McEnroe | 6     | 0     | 0     | 15    |\n" + //
@@ -306,7 +306,7 @@ public abstract class TennisGameTest {
             tennisGame.getPlayer(ivanLendl).setScore(TieBreakScore.ZERO);
             tennisGame.scores(johnMcEnroe);
 
-            assertThat(tennisGame.getWinner()).isEqualTo(johnMcEnroe);
+            assertThat(tennisGame.getWinnerName()).isEqualTo(johnMcEnroe);
             assertThat(tennisGame.toString()).isEqualTo("" + //
                     "| Player       | Set 1 | Result |\n" + //
                     "| John McEnroe | 6     | WINNER |\n" + //
