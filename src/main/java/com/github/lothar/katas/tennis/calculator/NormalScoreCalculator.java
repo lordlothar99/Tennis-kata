@@ -18,10 +18,11 @@ public class NormalScoreCalculator extends AbstractCalculator {
     }
 
     protected boolean isGamePointFor(Player player) {
+        Player opponent = opponent(player);
         return player.hasAdvantage() //
                 || FOURTY.equals(player.getScore()) //
-                        && !opponent(player).hasAdvantage()
-                        && !FOURTY.equals(opponent(player).getScore());
+                        && !opponent.hasAdvantage()
+                        && !FOURTY.equals(opponent.getScore());
     }
 
     protected void winsNormalPoint(Player player) {
