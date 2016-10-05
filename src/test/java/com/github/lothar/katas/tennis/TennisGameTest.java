@@ -284,7 +284,7 @@ public abstract class TennisGameTest {
         }
 
         @Test
-        public void should_points_be_classic_oridnal_when_there_is_a_tie_break() {
+        public void should_points_be_classic_ordinal_when_there_is_a_tie_break() {
             tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
             tennisGame.getPlayer(ivanLendl).setGamesWon(6);
             tennisGame.getPlayer(johnMcEnroe).setScore(TieBreakScore.ZERO);
