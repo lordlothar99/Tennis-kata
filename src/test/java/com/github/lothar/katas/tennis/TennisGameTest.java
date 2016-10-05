@@ -2,11 +2,11 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.GameType.ONE_SET;
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
-import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
-import static com.github.lothar.katas.tennis.Score.FIFTEEN;
-import static com.github.lothar.katas.tennis.Score.FOURTY;
-import static com.github.lothar.katas.tennis.Score.THIRTY;
-import static com.github.lothar.katas.tennis.Score.ZERO;
+import static com.github.lothar.katas.tennis.NormalScore.ADVANTAGE;
+import static com.github.lothar.katas.tennis.NormalScore.FIFTEEN;
+import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.NormalScore.THIRTY;
+import static com.github.lothar.katas.tennis.NormalScore.ZERO;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -265,11 +265,18 @@ public abstract class TennisGameTest {
 
         @Test
         public void should_there_be_a_tie_break_when_both_players_have_6_games_in_last_set() {
-            tennisGame.getPlayer(player1).setGamesWon(6);
+            tennisGame.getPlayer(player1).setGamesWon(5);
             tennisGame.getPlayer(player2).setGamesWon(6);
-            tennisGame.getPlayer(player1).setScore(ZERO);
+            tennisGame.getPlayer(player1).setScore(ADVANTAGE);
             tennisGame.getPlayer(player2).setScore(ZERO);
+            tennisGame.scores(player1);
 
+            assertThat(tennisGame.getScore(player1)).isEqualTo(TieBreakScore.ZERO);
+            assertThat(tennisGame.getScore(player2)).isEqualTo(TieBreakScore.ZERO);
+            assertThat(tennisGame.getGamesWon(player1)).isEqualTo(6);
+            assertThat(tennisGame.getGamesWon(player2)).isEqualTo(6);
+            assertThat(tennisGame.getSetsWon(player1)).isEqualTo(0);
+            assertThat(tennisGame.getSetsWon(player2)).isEqualTo(0);
             assertThat(tennisGame.isTieBreak()).isTrue();
         }
 
@@ -277,11 +284,11 @@ public abstract class TennisGameTest {
         public void should_points_be_classic_oridnal_when_there_is_a_tie_break() {
             tennisGame.getPlayer(player1).setGamesWon(6);
             tennisGame.getPlayer(player2).setGamesWon(6);
-            tennisGame.getPlayer(player1).setScore(ZERO);
-            tennisGame.getPlayer(player2).setScore(ZERO);
+            tennisGame.getPlayer(player1).setScore(TieBreakScore.ZERO);
+            tennisGame.getPlayer(player2).setScore(TieBreakScore.ZERO);
             tennisGame.scores(player1);
 
-            assertThat(tennisGame.getScore(player1)).isEqualTo(1);
+            assertThat(tennisGame.getScore(player1)).isEqualTo(new TieBreakScore(1));
         }
     }
 

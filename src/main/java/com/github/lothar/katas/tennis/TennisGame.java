@@ -1,7 +1,7 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
-import static com.github.lothar.katas.tennis.Score.FOURTY;
+import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
 import static java.util.Comparator.comparingInt;
 
 import java.util.HashMap;

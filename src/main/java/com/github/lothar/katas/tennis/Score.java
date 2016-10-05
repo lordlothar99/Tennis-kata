@@ -1,47 +1,6 @@
 package com.github.lothar.katas.tennis;
 
-public enum Score {
-    ZERO("0") {
-        @Override
-        public Score next() {
-            return FIFTEEN;
-        }
-    },
-    FIFTEEN("15") {
-        @Override
-        public Score next() {
-            return THIRTY;
-        }
-    },
-    THIRTY("30") {
-        @Override
-        public Score next() {
-            return FOURTY;
-        }
-    },
-    FOURTY("40") {
-        @Override
-        public Score next() {
-            return ADVANTAGE;
-        }
-    },
-    ADVANTAGE("ADV") {
-        @Override
-        public Score next() {
-            return null;
-        }
-    };
+public interface Score {
 
-    private String value;
-
-    private Score(String value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return value;
-    }
-
-    public abstract Score next();
+    Score next();
 }

@@ -1,6 +1,6 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.Score.FOURTY;
+import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
 
 import java.util.Collection;
 

@@ -1,6 +1,7 @@
 package com.github.lothar.katas.tennis;
 
 import java.util.Collection;
+import java.util.function.Consumer;
 
 public abstract class AbstractScoreCalculator implements ScoreCalculator {
 
@@ -11,16 +12,25 @@ public abstract class AbstractScoreCalculator implements ScoreCalculator {
     }
 
     protected void winsGame(Player player) {
+        Consumer<Player> newGamePreparer = Player::newGame;
+
         if (isSetPointFor(player)) {
-            player.incrementGamesWon();
             player.incrementSetWon();
-            players.stream() //
-                    .forEach(p -> p.newSet());
-        } else {
-            player.incrementGamesWon();
-            players.stream() //
-                    .forEach(p -> p.newGame());
+            Consumer<Player> newSetPreparer = Player::newSet;
+            newGamePreparer = newSetPreparer.andThen(newGamePreparer);
         }
+
+        player.incrementGamesWon();
+
+        if (isTieBreak()) {
+            newGamePreparer = newGamePreparer.andThen(Player::setupTieBreak);
+        }
+        players.stream().forEach(newGamePreparer);
+    }
+
+    public boolean isTieBreak() {
+        return players.stream() //
+                .allMatch(p -> p.getGamesWon() == 6);
     }
 
     private boolean isSetPointFor(Player player) {

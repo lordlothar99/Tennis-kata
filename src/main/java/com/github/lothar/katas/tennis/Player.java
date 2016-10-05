@@ -1,8 +1,8 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.Score.ADVANTAGE;
-import static com.github.lothar.katas.tennis.Score.FOURTY;
-import static com.github.lothar.katas.tennis.Score.ZERO;
+import static com.github.lothar.katas.tennis.NormalScore.ADVANTAGE;
+import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.NormalScore.ZERO;
 
 import java.util.Stack;
 
@@ -73,7 +73,10 @@ class Player {
 
     public void newSet() {
         gamesWonBySet.add(0);
-        newGame();
+    }
+
+    public void setupTieBreak() {
+        score = TieBreakScore.ZERO;
     }
 
     public boolean hasWonAtLeastFiveGames() {
