@@ -18,7 +18,7 @@ public class ScoreBoardTest {
     private Players players = new Players("John", "Bob");
     private Player john = players.get("John");
     private Player bob = players.get("Bob");
-    private ScoreBoard scoreBoard = new ScoreBoard(players, ONE_SET, Optional.empty());
+    private ScorePrinter scoreBoard = new ScorePrinter(players, ONE_SET, Optional.empty());
 
     @Test
     public void should_board_display_scores_when_scores_are_blank() {
@@ -120,7 +120,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_blank_and_three_sets() {
-        scoreBoard = new ScoreBoard(players, THREE_SETS, Optional.empty());
+        scoreBoard = new ScorePrinter(players, THREE_SETS, Optional.empty());
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Score |\n" + //
                 "| John   | 0     | 0     | 0     | 0     |\n" + //
@@ -129,7 +129,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_blank_and_five_sets() {
-        scoreBoard = new ScoreBoard(players, FIVE_SETS, Optional.empty());
+        scoreBoard = new ScorePrinter(players, FIVE_SETS, Optional.empty());
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
                 "| John   | 0     | 0     | 0     | 0     | 0     | 0     |\n" + //
@@ -138,7 +138,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_scores_are_complex_and_five_sets() {
-        scoreBoard = new ScoreBoard(players, FIVE_SETS, Optional.empty());
+        scoreBoard = new ScorePrinter(players, FIVE_SETS, Optional.empty());
         john.setGamesWon(1);
         john.setupNewSet();
         john.setGamesWon(2);
@@ -169,7 +169,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_winner_when_match_is_over() {
-        scoreBoard = new ScoreBoard(players, ONE_SET, Optional.of(john));
+        scoreBoard = new ScorePrinter(players, ONE_SET, Optional.of(john));
         john.setGamesWon(6);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Result |\n" + //

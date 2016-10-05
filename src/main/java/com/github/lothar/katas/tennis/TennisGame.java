@@ -29,7 +29,7 @@ public class TennisGame {
     }
 
     public String toString() {
-        return new ScoreBoard(players, gameType, getWinnerPlayer()).toString();
+        return new ScorePrinter(players, gameType, getWinnerPlayer()).toString();
     }
 
     public Score getScore(String player) {

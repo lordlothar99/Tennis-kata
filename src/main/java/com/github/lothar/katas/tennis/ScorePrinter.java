@@ -9,7 +9,7 @@ import static java.util.stream.IntStream.rangeClosed;
 import java.util.List;
 import java.util.Optional;
 
-class ScoreBoard {
+class ScorePrinter {
 
     private static final String PLAYER_COLUMN = "Player";
     private static final int PLAYER_COLUMN_LENGTH = PLAYER_COLUMN.length();
@@ -23,7 +23,7 @@ class ScoreBoard {
     private GameType gameType;
     private Optional<Player> winner;
 
-    public ScoreBoard(Players players, GameType gameType, Optional<Player> winner) {
+    public ScorePrinter(Players players, GameType gameType, Optional<Player> winner) {
         this.players = players;
         this.gameType = gameType;
         this.winner = winner;
