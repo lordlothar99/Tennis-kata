@@ -2,6 +2,7 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
+import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
@@ -68,16 +69,11 @@ public class TennisGame {
     }
 
     private Optional<Player> getWinnerPlayer() {
-        if (!isMatchOver()) {
-            return Optional.empty();
-        }
-        return Optional.of(players.playerWithMostSetsWon());
+        return ofNullable(!isMatchOver() ? null : players.playerWithMostSetsWon());
     }
 
     private boolean isMatchOver() {
-        return gameType.setCount() == players.stream() //
-                .mapToInt(Player::getSetsWon) //
-                .sum();
+        return gameType.setCount() == players.getSetsWonSum();
     }
 
     public boolean isTieBreak() {

@@ -35,4 +35,10 @@ public class Players {
                 .max(comparingInt(Player::getSetsWon)) //
                 .get();
     }
+
+    public int getSetsWonSum() {
+        return stream() //
+                .mapToInt(Player::getSetsWon) //
+                .sum();
+    }
 }
