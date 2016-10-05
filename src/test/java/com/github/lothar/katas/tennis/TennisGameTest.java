@@ -297,6 +297,21 @@ public abstract class TennisGameTest {
                     "| John McEnroe | 6     | 1     |\n" + //
                     "| Ivan Lendl   | 6     | 0     |\n");
         }
+
+        @Test
+        public void should_match_be_won_when_one_player_wins_7_points_in_tie_break() {
+            tennisGame.getPlayer(johnMcEnroe).setGamesWon(6);
+            tennisGame.getPlayer(ivanLendl).setGamesWon(6);
+            tennisGame.getPlayer(johnMcEnroe).setScore(new TieBreakScore(6));
+            tennisGame.getPlayer(ivanLendl).setScore(TieBreakScore.ZERO);
+            tennisGame.scores(johnMcEnroe);
+
+            assertThat(tennisGame.getWinner()).isEqualTo(johnMcEnroe);
+            assertThat(tennisGame.toString()).isEqualTo("" + //
+                    "| Player       | Set 1 | Result |\n" + //
+                    "| John McEnroe | 6     | WINNER |\n" + //
+                    "| Ivan Lendl   | 6     |        |\n");
+        }
     }
 
     protected static void repeat(int times, Runnable runnable) {
