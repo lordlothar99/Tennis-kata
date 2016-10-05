@@ -1,17 +1,15 @@
 package com.github.lothar.katas.tennis.calculator;
 
 import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
-import static com.github.lothar.katas.tennis.TennisGame.MIN_POINTS_TO_WIN_TIE_BREAK;
-import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
 import com.github.lothar.katas.tennis.SetsToWin;
 import com.github.lothar.katas.tennis.TennisGame;
 
-public class AbstractCalculator implements ScoreCalculator {
+public abstract class AbstractCalculator implements ScoreCalculator {
 
-    private Players players;
+    protected Players players;
     private SetsToWin setsToWin;
 
     public AbstractCalculator(Players players, SetsToWin setsToWin) {
@@ -60,20 +58,7 @@ public class AbstractCalculator implements ScoreCalculator {
         players.stream().forEach(Player::setupNewGame);
     }
 
-    protected boolean isGamePointFor(Player player) {
-        if (isTieBreak()) {
-            int tieBreakScore = players.tieBreakScore(player);
-            int opponentScore = players.tieBreakScore(opponent(player));
-
-            return (tieBreakScore + 1) >= MIN_POINTS_TO_WIN_TIE_BREAK
-                    && (tieBreakScore + 1 - opponentScore > 1);
-        } else {
-            return player.hasAdvantage() //
-                    || FOURTY.equals(player.getScore()) //
-                            && !opponent(player).hasAdvantage()
-                            && !FOURTY.equals(opponent(player).getScore());
-        }
-    }
+    protected abstract boolean isGamePointFor(Player player);
 
     private void winsTheGame(Player player) {
         player.incrementGamesWon();
