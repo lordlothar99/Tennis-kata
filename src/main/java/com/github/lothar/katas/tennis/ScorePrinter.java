@@ -37,7 +37,7 @@ class ScorePrinter {
     }
 
     private String header() {
-        List<String> setsColumns = rangeClosed(1, gameType.setCount()) //
+        List<String> setsColumns = rangeClosed(1, gameType.setsCount()) //
                 .mapToObj(set -> SET_COLUMN + " " + set) //
                 .collect(toList());
         return line(PLAYER_COLUMN, setsColumns, lastColumnHeader());
@@ -48,7 +48,7 @@ class ScorePrinter {
     }
 
     private String scoreLine(Player player) {
-        List<Integer> gamesWonBySets = rangeClosed(1, gameType.setCount()) //
+        List<Integer> gamesWonBySets = rangeClosed(1, gameType.setsCount()) //
                 .mapToObj(set -> player.getGamesWonInSet(set)) //
                 .collect(toList());
         return line(player.getName(), gamesWonBySets, lastColumnValue(player));

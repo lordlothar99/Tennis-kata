@@ -6,13 +6,13 @@ public enum GameType {
     THREE_SETS(3), //
     FIVE_SETS(5);
 
-    private int value;
+    private int setsCount;
 
-    private GameType(int value) {
-        this.value = value;
+    private GameType(int setsCount) {
+        this.setsCount = setsCount;
     }
 
-    public int setCount() {
-        return value;
+    public int setsCount() {
+        return setsCount;
     }
 }

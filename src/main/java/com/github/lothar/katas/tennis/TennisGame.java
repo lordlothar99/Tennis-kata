@@ -80,7 +80,7 @@ public class TennisGame {
     }
 
     private boolean isMatchOver() {
-        return gameType.setCount() == players.getSetsWonSum();
+        return gameType.setsCount() == players.getSetsWonSum();
     }
 
     public boolean isTieBreak() {
