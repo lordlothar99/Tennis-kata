@@ -3,10 +3,10 @@ package com.github.lothar.katas.tennis;
 import static com.github.lothar.katas.tennis.GameType.FIVE_SETS;
 import static com.github.lothar.katas.tennis.GameType.ONE_SET;
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
-import static com.github.lothar.katas.tennis.NormalScore.ADVANTAGE;
-import static com.github.lothar.katas.tennis.NormalScore.FIFTEEN;
-import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
-import static com.github.lothar.katas.tennis.NormalScore.THIRTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
+import static com.github.lothar.katas.tennis.score.NormalScore.FIFTEEN;
+import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.THIRTY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;

@@ -1,10 +1,12 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
-import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
+
+import com.github.lothar.katas.tennis.score.Score;
 
 public class TennisGame {
 

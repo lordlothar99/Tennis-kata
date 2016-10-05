@@ -1,6 +1,6 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 
 public class Normal extends AbstractScoreCalculator {
 

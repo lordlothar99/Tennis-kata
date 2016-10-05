@@ -1,10 +1,13 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.NormalScore.ADVANTAGE;
-import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
-import static com.github.lothar.katas.tennis.NormalScore.ZERO;
+import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
+import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.ZERO;
 
 import java.util.Stack;
+
+import com.github.lothar.katas.tennis.score.Score;
+import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 class Player {
 

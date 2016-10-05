@@ -2,15 +2,17 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.GameType.ONE_SET;
 import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
-import static com.github.lothar.katas.tennis.NormalScore.ADVANTAGE;
-import static com.github.lothar.katas.tennis.NormalScore.FIFTEEN;
-import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
-import static com.github.lothar.katas.tennis.NormalScore.THIRTY;
-import static com.github.lothar.katas.tennis.NormalScore.ZERO;
+import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
+import static com.github.lothar.katas.tennis.score.NormalScore.FIFTEEN;
+import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.THIRTY;
+import static com.github.lothar.katas.tennis.score.NormalScore.ZERO;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
+
+import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 public abstract class TennisGameTest {
 
