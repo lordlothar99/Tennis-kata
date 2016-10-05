@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class TennisGame {
 
+    static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     private GameType gameType;
     private Map<String, Player> players = new HashMap<>();
 
@@ -94,6 +95,6 @@ public class TennisGame {
 
     public boolean isTieBreak() {
         return players.values().stream() //
-                .allMatch(p -> p.getGamesWon() == 6);
+                .allMatch(p -> p.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET);
     }
 }

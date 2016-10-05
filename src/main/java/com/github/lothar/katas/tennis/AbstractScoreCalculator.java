@@ -1,5 +1,7 @@
 package com.github.lothar.katas.tennis;
 
+import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
+
 import java.util.Collection;
 import java.util.function.Consumer;
 
@@ -30,7 +32,7 @@ public abstract class AbstractScoreCalculator implements ScoreCalculator {
 
     public boolean isTieBreak() {
         return players.stream() //
-                .allMatch(p -> p.getGamesWon() == 6);
+                .allMatch(p -> p.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET);
     }
 
     private boolean isSetPointFor(Player player) {
