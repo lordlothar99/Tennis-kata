@@ -2,6 +2,7 @@ package com.github.lothar.katas.tennis;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Players {
@@ -19,5 +20,11 @@ public class Players {
 
     public Player get(String player) {
         return players.get(player);
+    }
+
+    public Optional<Player> playerWithAdvantage() {
+        return stream() //
+                .filter(Player::hasAdvantage) //
+                .findFirst();
     }
 }

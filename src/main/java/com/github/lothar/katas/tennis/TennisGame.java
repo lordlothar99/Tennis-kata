@@ -46,15 +46,9 @@ public class TennisGame {
 
     private ScoreCalculator scoreCalculator() {
         return isDeuce() ? new Deuce() //
-                : playerWithAdvantage() //
+                : players.playerWithAdvantage() //
                         .map(p -> (ScoreCalculator) new Advantage(players, p)) //
                         .orElse(new Normal(players));
-    }
-
-    private Optional<Player> playerWithAdvantage() {
-        return players.stream() //
-                .filter(Player::hasAdvantage) //
-                .findFirst();
     }
 
     private boolean isDeuce() {
