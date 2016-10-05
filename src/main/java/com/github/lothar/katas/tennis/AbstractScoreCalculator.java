@@ -2,14 +2,13 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
 
-import java.util.Collection;
 import java.util.function.Consumer;
 
 public abstract class AbstractScoreCalculator implements ScoreCalculator {
 
-    protected Collection<Player> players;
+    protected Players players;
 
-    public AbstractScoreCalculator(Collection<Player> players) {
+    public AbstractScoreCalculator(Players players) {
         this.players = players;
     }
 

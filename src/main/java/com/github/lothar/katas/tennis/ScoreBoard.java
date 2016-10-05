@@ -6,7 +6,6 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.range;
 import static java.util.stream.IntStream.rangeClosed;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +19,11 @@ class ScoreBoard {
     private static final String RESULT_COLUMN = "Result";
     private static final String WINNER = "WINNER";
 
-    private Collection<Player> players;
+    private Players players;
     private GameType gameType;
     private Optional<Player> winner;
 
-    public ScoreBoard(Collection<Player> players, GameType gameType, Optional<Player> winner) {
+    public ScoreBoard(Players players, GameType gameType, Optional<Player> winner) {
         this.players = players;
         this.gameType = gameType;
         this.winner = winner;

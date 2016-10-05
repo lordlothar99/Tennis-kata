@@ -2,11 +2,9 @@ package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
 
-import java.util.Collection;
-
 public class Normal extends AbstractScoreCalculator {
 
-    public Normal(Collection<Player> players) {
+    public Normal(Players players) {
         super(players);
     }
 

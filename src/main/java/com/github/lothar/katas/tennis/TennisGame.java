@@ -4,15 +4,13 @@ import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.NormalScore.FOURTY;
 import static java.util.Comparator.comparingInt;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class TennisGame {
 
     static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     private GameType gameType;
-    private Map<String, Player> players = new HashMap<>();
+    private Players players;
 
     public TennisGame(String player1, String player2) {
         this(player1, player2, THREE_SETS);
@@ -20,12 +18,11 @@ public class TennisGame {
 
     public TennisGame(String player1, String player2, GameType gameType) {
         this.gameType = gameType;
-        players.put(player1, new Player(player1));
-        players.put(player2, new Player(player2));
+        players = new Players(player1, player2);
     }
 
     public String getScoreBoard() {
-        return new ScoreBoard(players.values(), gameType, getWinnerPlayer()).toString();
+        return new ScoreBoard(players, gameType, getWinnerPlayer()).toString();
     }
 
     public Score getScore(String player) {
@@ -51,18 +48,18 @@ public class TennisGame {
     private ScoreCalculator getCalculator() {
         return isDeuce() ? new Deuce() //
                 : playerWithAdvantage() //
-                        .map(p -> (ScoreCalculator) new Advantage(players.values(), p)) //
-                        .orElse(new Normal(players.values()));
+                        .map(p -> (ScoreCalculator) new Advantage(players, p)) //
+                        .orElse(new Normal(players));
     }
 
     private Optional<Player> playerWithAdvantage() {
-        return players.values().stream() //
+        return players.stream() //
                 .filter(Player::hasAdvantage) //
                 .findFirst();
     }
 
     private boolean isDeuce() {
-        return players.values().stream() //
+        return players.stream() //
                 .allMatch(p -> FOURTY.equals(p.getScore()));
     }
 
@@ -82,19 +79,19 @@ public class TennisGame {
         if (!isMatchOver()) {
             return Optional.empty();
         }
-        return Optional.of(players.values().stream() //
+        return Optional.of(players.stream() //
                 .max(comparingInt(Player::getSetsWon)) //
                 .get());
     }
 
     private boolean isMatchOver() {
-        return gameType.setCount() == players.values().stream() //
+        return gameType.setCount() == players.stream() //
                 .mapToInt(Player::getSetsWon) //
                 .sum();
     }
 
     public boolean isTieBreak() {
-        return players.values().stream() //
+        return players.stream() //
                 .allMatch(p -> p.getGamesWon() == GAMES_COUNT_TO_WIN_A_SET);
     }
 }
