@@ -6,12 +6,16 @@ import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
+import com.github.lothar.katas.tennis.calculator.Advantage;
+import com.github.lothar.katas.tennis.calculator.Deuce;
+import com.github.lothar.katas.tennis.calculator.Normal;
+import com.github.lothar.katas.tennis.calculator.ScoreCalculator;
 import com.github.lothar.katas.tennis.exception.MatchIsOverException;
 import com.github.lothar.katas.tennis.score.Score;
 
 public class TennisGame {
 
-    static final int GAMES_COUNT_TO_WIN_A_SET = 6;
+    public static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     private GameType gameType;
     private Players players;
 

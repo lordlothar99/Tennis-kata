@@ -1,8 +1,11 @@
-package com.github.lothar.katas.tennis;
+package com.github.lothar.katas.tennis.calculator;
 
 import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
 
 import java.util.function.Consumer;
+
+import com.github.lothar.katas.tennis.Player;
+import com.github.lothar.katas.tennis.Players;
 
 public abstract class AbstractScoreCalculator implements ScoreCalculator {
 

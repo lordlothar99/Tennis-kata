@@ -1,4 +1,6 @@
-package com.github.lothar.katas.tennis;
+package com.github.lothar.katas.tennis.calculator;
+
+import com.github.lothar.katas.tennis.Player;
 
 public class Deuce implements ScoreCalculator {
     @Override

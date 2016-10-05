@@ -9,7 +9,7 @@ import java.util.Stack;
 import com.github.lothar.katas.tennis.score.Score;
 import com.github.lothar.katas.tennis.score.TieBreakScore;
 
-class Player {
+public class Player {
 
     private Score score = ZERO;
     private Stack<Integer> gamesWonBySet = new Stack<>();
