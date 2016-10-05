@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.github.lothar.katas.tennis.printer.ScorePrinter;
 
-public class ScoreBoardTest {
+public class ScorePrinterTest {
 
     private Players players = new Players("John", "Bob");
     private Player john = players.get("John");
