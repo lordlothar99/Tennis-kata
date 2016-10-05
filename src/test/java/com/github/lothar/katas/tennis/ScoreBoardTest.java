@@ -1,8 +1,5 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.GameType.FIVE_SETS;
-import static com.github.lothar.katas.tennis.GameType.ONE_SET;
-import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
 import static com.github.lothar.katas.tennis.score.NormalScore.FIFTEEN;
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
@@ -20,7 +17,7 @@ public class ScoreBoardTest {
     private Players players = new Players("John", "Bob");
     private Player john = players.get("John");
     private Player bob = players.get("Bob");
-    private ScorePrinter scoreBoard = new ScorePrinter(players, ONE_SET, Optional.empty());
+    private ScorePrinter scoreBoard = new ScorePrinter(players, Optional.empty());
 
     @Test
     public void should_board_display_scores_when_scores_are_blank() {
@@ -121,26 +118,8 @@ public class ScoreBoardTest {
     }
 
     @Test
-    public void should_board_display_scores_when_scores_are_blank_and_three_sets() {
-        scoreBoard = new ScorePrinter(players, THREE_SETS, Optional.empty());
-        assertThat(scoreBoard.toString()).isEqualTo("" + //
-                "| Player | Set 1 | Set 2 | Set 3 | Score |\n" + //
-                "| John   | 0     | 0     | 0     | 0     |\n" + //
-                "| Bob    | 0     | 0     | 0     | 0     |\n");
-    }
-
-    @Test
-    public void should_board_display_scores_when_scores_are_blank_and_five_sets() {
-        scoreBoard = new ScorePrinter(players, FIVE_SETS, Optional.empty());
-        assertThat(scoreBoard.toString()).isEqualTo("" + //
-                "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
-                "| John   | 0     | 0     | 0     | 0     | 0     | 0     |\n" + //
-                "| Bob    | 0     | 0     | 0     | 0     | 0     | 0     |\n");
-    }
-
-    @Test
-    public void should_board_display_scores_when_scores_are_complex_and_five_sets() {
-        scoreBoard = new ScorePrinter(players, FIVE_SETS, Optional.empty());
+    public void should_board_display_scores_when_scores_are_complex() {
+        scoreBoard = new ScorePrinter(players, Optional.empty());
         john.setGamesWon(1);
         john.setupNewSet();
         john.setGamesWon(2);
@@ -150,7 +129,6 @@ public class ScoreBoardTest {
         john.setGamesWon(4);
         john.setupNewSet();
         john.setGamesWon(5);
-        john.setupNewSet();
         john.setScore(FIFTEEN);
         bob.setGamesWon(6);
         bob.setupNewSet();
@@ -161,7 +139,6 @@ public class ScoreBoardTest {
         bob.setGamesWon(9);
         bob.setupNewSet();
         bob.setGamesWon(10);
-        bob.setupNewSet();
         bob.setScore(THIRTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
@@ -171,7 +148,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_winner_when_match_is_over() {
-        scoreBoard = new ScorePrinter(players, ONE_SET, Optional.of(john));
+        scoreBoard = new ScorePrinter(players, Optional.of(john));
         john.setGamesWon(6);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Result |\n" + //

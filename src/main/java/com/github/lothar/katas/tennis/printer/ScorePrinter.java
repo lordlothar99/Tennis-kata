@@ -9,7 +9,7 @@ import static java.util.stream.IntStream.rangeClosed;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.lothar.katas.tennis.GameType;
+import com.github.lothar.katas.tennis.SetsToWin;
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
 
@@ -24,12 +24,10 @@ public class ScorePrinter {
     private static final String WINNER = "WINNER";
 
     private Players players;
-    private GameType gameType;
     private Optional<Player> winner;
 
-    public ScorePrinter(Players players, GameType gameType, Optional<Player> winner) {
+    public ScorePrinter(Players players, Optional<Player> winner) {
         this.players = players;
-        this.gameType = gameType;
         this.winner = winner;
     }
 
@@ -41,7 +39,7 @@ public class ScorePrinter {
     }
 
     private String header() {
-        List<String> setsColumns = rangeClosed(1, gameType.setsCount()) //
+        List<String> setsColumns = rangeClosed(1, players.getSetsCount()) //
                 .mapToObj(set -> SET_COLUMN + " " + set) //
                 .collect(toList());
         return line(PLAYER_COLUMN, setsColumns, lastColumnHeader());
@@ -52,7 +50,7 @@ public class ScorePrinter {
     }
 
     private String scoreLine(Player player) {
-        List<Integer> gamesWonBySets = rangeClosed(1, gameType.setsCount()) //
+        List<Integer> gamesWonBySets = rangeClosed(1, players.getSetsCount()) //
                 .mapToObj(set -> player.getGamesWonInSet(set)) //
                 .collect(toList());
         return line(player.getName(), gamesWonBySets, lastColumnValue(player));

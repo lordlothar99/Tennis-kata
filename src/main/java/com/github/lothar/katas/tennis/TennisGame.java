@@ -1,6 +1,6 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
+import static com.github.lothar.katas.tennis.SetsToWin.THREE;
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 import static java.util.Optional.ofNullable;
 
@@ -18,20 +18,20 @@ public class TennisGame {
 
     public static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     public static final int MIN_POINTS_TO_WIN_TIE_BREAK = 7;
-    private GameType gameType;
+    private SetsToWin gameType;
     private Players players;
 
     public TennisGame(String player1Name, String player2Name) {
-        this(player1Name, player2Name, THREE_SETS);
+        this(player1Name, player2Name, THREE);
     }
 
-    public TennisGame(String player1Name, String player2Name, GameType gameType) {
+    public TennisGame(String player1Name, String player2Name, SetsToWin gameType) {
         this.gameType = gameType;
         players = new Players(player1Name, player2Name);
     }
 
     public String toString() {
-        return new ScorePrinter(players, gameType, getWinner()).toString();
+        return new ScorePrinter(players, getWinner()).toString();
     }
 
     public Score getScore(String playerName) {
@@ -85,7 +85,7 @@ public class TennisGame {
         return isTieBreak() //
                 && players.haveAtLeast2PointsOfDifferenceInTieBreak() //
                 && players.existPlayerWithEnoughPointsToWinTieBreak() //
-                || gameType.setsCount() == players.getSetsWonSum();
+                || gameType.intValue() == players.getSetsWonSum();
     }
 
     public boolean isTieBreak() {

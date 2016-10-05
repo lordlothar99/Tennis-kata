@@ -64,4 +64,8 @@ public class Players {
     private int tieBreakScore(Player player) {
         return ((TieBreakScore) player.getScore()).intValue();
     }
+
+    public int getSetsCount() {
+        return player1.getSetsCount();
+    }
 }

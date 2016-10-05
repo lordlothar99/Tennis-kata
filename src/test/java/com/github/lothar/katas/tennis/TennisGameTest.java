@@ -1,7 +1,7 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.GameType.ONE_SET;
-import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
+import static com.github.lothar.katas.tennis.SetsToWin.TWO;
+import static com.github.lothar.katas.tennis.SetsToWin.THREE;
 import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
 import static com.github.lothar.katas.tennis.score.NormalScore.FIFTEEN;
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
@@ -21,7 +21,7 @@ public abstract class TennisGameTest {
     protected String ivanLendl = "Ivan Lendl";
 
     public static class OneSet extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, ONE_SET);
+        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
 
         @Test
         public void should_both_players_have_0_points_when_game_starts() {
@@ -196,7 +196,7 @@ public abstract class TennisGameTest {
     }
 
     public static class ThreeSets extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE_SETS);
+        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
 
         @Test
         public void should_player1_win_the_set_when_he_scores_in_last_game_of_the_set() {
@@ -224,7 +224,7 @@ public abstract class TennisGameTest {
     }
 
     public static class TwoGamesOfDifference extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE_SETS);
+        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
 
         @Test
         public void should_set_still_continue_when_not_two_games_of_difference() {
@@ -272,7 +272,7 @@ public abstract class TennisGameTest {
     }
 
     public static class TieBreak extends TennisGameTest {
-        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, ONE_SET);
+        private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
 
         @Test
         public void should_there_be_a_tie_break_when_both_players_have_6_games_in_last_set() {

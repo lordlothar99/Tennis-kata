@@ -51,7 +51,7 @@ public class Player {
     }
 
     public void setGamesWon(int gamesWon) {
-        gamesWonBySet.set(gamesWonBySet.size() - 1, gamesWon);
+        gamesWonBySet.set(getSetsCount() - 1, gamesWon);
     }
 
     public boolean hasAdvantage() {
@@ -59,7 +59,11 @@ public class Player {
     }
 
     public int getGamesWonInSet(int set) {
-        return gamesWonBySet.size() < set ? 0 : gamesWonBySet.get(set - 1);
+        return getSetsCount() < set ? 0 : gamesWonBySet.get(set - 1);
+    }
+
+    public int getSetsCount() {
+        return gamesWonBySet.size();
     }
 
     public int getSetsWon() {
