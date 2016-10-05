@@ -13,6 +13,7 @@ import com.github.lothar.katas.tennis.calculator.ScoreCalculator;
 import com.github.lothar.katas.tennis.exception.MatchIsOverException;
 import com.github.lothar.katas.tennis.printer.ScorePrinter;
 import com.github.lothar.katas.tennis.score.Score;
+import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 public class TennisGame {
 
@@ -81,6 +82,10 @@ public class TennisGame {
     }
 
     private boolean isMatchOver() {
+        if (isTieBreak()) {
+            return players.stream() //
+                    .anyMatch(p -> new TieBreakScore(7).equals(p.getScore()));
+        }
         return gameType.setsCount() == players.getSetsWonSum();
     }
 
