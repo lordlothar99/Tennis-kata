@@ -41,11 +41,10 @@ public class TennisGame {
         if (isMatchOver()) {
             throw new MatchIsOverException();
         }
-        ScoreCalculator scoreCalculator = getCalculator();
-        scoreCalculator.playerScores(getPlayer(player));
+        scoreCalculator().playerScores(getPlayer(player));
     }
 
-    private ScoreCalculator getCalculator() {
+    private ScoreCalculator scoreCalculator() {
         return isDeuce() ? new Deuce() //
                 : playerWithAdvantage() //
                         .map(p -> (ScoreCalculator) new Advantage(players, p)) //
