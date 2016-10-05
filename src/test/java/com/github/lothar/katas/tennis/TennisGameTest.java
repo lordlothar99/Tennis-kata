@@ -289,6 +289,10 @@ public abstract class TennisGameTest {
             tennisGame.scores(player1);
 
             assertThat(tennisGame.getScore(player1)).isEqualTo(new TieBreakScore(1));
+            assertThat(tennisGame.getScoreBoard()).isEqualTo("" + //
+                    "| Player       | Set 1 | Score |\n" + //
+                    "| John McEnroe | 6     | 1     |\n" + //
+                    "| Ivan Lendl   | 6     | 0     |\n");
         }
     }
 
