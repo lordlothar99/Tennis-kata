@@ -1,6 +1,6 @@
 package com.github.lothar.katas.tennis.score;
 
-public class TieBreakScore implements Score, Comparable<TieBreakScore> {
+public class TieBreakScore implements Score {
 
     public static final TieBreakScore ZERO = new TieBreakScore(0);
 
@@ -36,10 +36,5 @@ public class TieBreakScore implements Score, Comparable<TieBreakScore> {
 
     public int intValue() {
         return value;
-    }
-
-    @Override
-    public int compareTo(TieBreakScore tieBreakScore) {
-        return Integer.compare(value, tieBreakScore.value);
     }
 }

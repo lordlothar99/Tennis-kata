@@ -1,6 +1,7 @@
 package com.github.lothar.katas.tennis;
 
 import static com.github.lothar.katas.tennis.TennisGame.MIN_POINTS_TO_WIN_TIE_BREAK;
+import static java.lang.Math.abs;
 import static java.util.Comparator.comparingInt;
 
 import java.util.Optional;
@@ -49,19 +50,18 @@ public class Players {
     }
 
     public boolean haveAtLeast2PointsOfDifferenceInTieBreak() {
-        int player1Score = tieBreakScore(player1).intValue();
-        int player2Score = tieBreakScore(player2).intValue();
+        int player1Score = tieBreakScore(player1);
+        int player2Score = tieBreakScore(player2);
 
-        return Math.abs(player2Score - player1Score) >= 2;
+        return abs(player2Score - player1Score) >= 2;
     }
 
     public boolean existPlayerWithEnoughPointsToWinTieBreak() {
         return stream() //
-                .anyMatch(p -> tieBreakScore(p)
-                        .compareTo(new TieBreakScore(MIN_POINTS_TO_WIN_TIE_BREAK)) >= 0);
+                .anyMatch(p -> tieBreakScore(p) >= MIN_POINTS_TO_WIN_TIE_BREAK);
     }
 
-    private TieBreakScore tieBreakScore(Player player) {
-        return (TieBreakScore) player.getScore();
+    private int tieBreakScore(Player player) {
+        return ((TieBreakScore) player.getScore()).intValue();
     }
 }
