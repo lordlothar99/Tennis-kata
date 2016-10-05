@@ -34,7 +34,7 @@ public class Player {
         score = score.next();
     }
 
-    public void setupNewGame() {
+    public void resetScore() {
         score = ZERO;
     }
 
