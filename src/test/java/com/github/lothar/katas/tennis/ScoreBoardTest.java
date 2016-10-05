@@ -16,8 +16,8 @@ import org.junit.Test;
 public class ScoreBoardTest {
 
     private Players players = new Players("John", "Bob");
-    private Player player1 = players.get("John");
-    private Player player2 = players.get("Bob");
+    private Player john = players.get("John");
+    private Player bob = players.get("Bob");
     private ScoreBoard scoreBoard = new ScoreBoard(players, ONE_SET, Optional.empty());
 
     @Test
@@ -30,7 +30,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player1_has_fifteen() {
-        player1.setScore(FIFTEEN);
+        john.setScore(FIFTEEN);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 15    |\n" + //
@@ -39,7 +39,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player1_has_thirty() {
-        player1.setScore(THIRTY);
+        john.setScore(THIRTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 30    |\n" + //
@@ -48,7 +48,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player1_has_fourty() {
-        player1.setScore(FOURTY);
+        john.setScore(FOURTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 40    |\n" + //
@@ -57,7 +57,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player1_has_advantage() {
-        player1.setScore(ADVANTAGE);
+        john.setScore(ADVANTAGE);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | ADV   |\n" + //
@@ -66,7 +66,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player2_has_fifteen() {
-        player2.setScore(FIFTEEN);
+        bob.setScore(FIFTEEN);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 0     |\n" + //
@@ -75,7 +75,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player2_has_thirty() {
-        player2.setScore(THIRTY);
+        bob.setScore(THIRTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 0     |\n" + //
@@ -84,7 +84,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player2_has_fourty() {
-        player2.setScore(FOURTY);
+        bob.setScore(FOURTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 0     |\n" + //
@@ -93,7 +93,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player2_has_advantage() {
-        player2.setScore(ADVANTAGE);
+        bob.setScore(ADVANTAGE);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 0     |\n" + //
@@ -102,7 +102,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player1_has_one_set() {
-        player1.setGamesWon(1);
+        john.setGamesWon(1);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 1     | 0     |\n" + //
@@ -111,7 +111,7 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_scores_when_player2_has_one_set() {
-        player2.setGamesWon(1);
+        bob.setGamesWon(1);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Score |\n" + //
                 "| John   | 0     | 0     |\n" + //
@@ -139,28 +139,28 @@ public class ScoreBoardTest {
     @Test
     public void should_board_display_scores_when_scores_are_complex_and_five_sets() {
         scoreBoard = new ScoreBoard(players, FIVE_SETS, Optional.empty());
-        player1.setGamesWon(1);
-        player1.setupNewSet();
-        player1.setGamesWon(2);
-        player1.setupNewSet();
-        player1.setGamesWon(3);
-        player1.setupNewSet();
-        player1.setGamesWon(4);
-        player1.setupNewSet();
-        player1.setGamesWon(5);
-        player1.setupNewSet();
-        player1.setScore(FIFTEEN);
-        player2.setGamesWon(6);
-        player2.setupNewSet();
-        player2.setGamesWon(7);
-        player2.setupNewSet();
-        player2.setGamesWon(8);
-        player2.setupNewSet();
-        player2.setGamesWon(9);
-        player2.setupNewSet();
-        player2.setGamesWon(10);
-        player2.setupNewSet();
-        player2.setScore(THIRTY);
+        john.setGamesWon(1);
+        john.setupNewSet();
+        john.setGamesWon(2);
+        john.setupNewSet();
+        john.setGamesWon(3);
+        john.setupNewSet();
+        john.setGamesWon(4);
+        john.setupNewSet();
+        john.setGamesWon(5);
+        john.setupNewSet();
+        john.setScore(FIFTEEN);
+        bob.setGamesWon(6);
+        bob.setupNewSet();
+        bob.setGamesWon(7);
+        bob.setupNewSet();
+        bob.setGamesWon(8);
+        bob.setupNewSet();
+        bob.setGamesWon(9);
+        bob.setupNewSet();
+        bob.setGamesWon(10);
+        bob.setupNewSet();
+        bob.setScore(THIRTY);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Set 2 | Set 3 | Set 4 | Set 5 | Score |\n" + //
                 "| John   | 1     | 2     | 3     | 4     | 5     | 15    |\n" + //
@@ -169,8 +169,8 @@ public class ScoreBoardTest {
 
     @Test
     public void should_board_display_winner_when_match_is_over() {
-        scoreBoard = new ScoreBoard(players, ONE_SET, Optional.of(player1));
-        player1.setGamesWon(6);
+        scoreBoard = new ScoreBoard(players, ONE_SET, Optional.of(john));
+        john.setGamesWon(6);
         assertThat(scoreBoard.toString()).isEqualTo("" + //
                 "| Player | Set 1 | Result |\n" + //
                 "| John   | 6     | WINNER |\n" + //
