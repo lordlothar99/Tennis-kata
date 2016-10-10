@@ -11,7 +11,7 @@ public enum GameType {
         this.value = value;
     }
 
-    public int setsCountToWin() {
+    public int setsCountToWinTheMatch() {
         return value;
     }
 }

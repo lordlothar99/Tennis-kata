@@ -18,25 +18,15 @@ public abstract class AbstractPointAnalyzer implements PointAnalyzer {
 
     @Override
     public Point pointFor(Player player) {
-        Point point;
-        if (isMatchPointFor(player)) {
-            point = new MatchPoint(players);
-
-        } else if (isSetPointFor(player)) {
-            point = new SetPoint(players);
-
-        } else if (isGamePointFor(player)) {
-            point = new GamePoint(players);
-
-        } else {
-            point = new NormalPoint(players);
-        }
-        return point;
+        return isMatchPointFor(player) ? new MatchPoint(players) //
+             : isSetPointFor(player) ? new SetPoint(players) //
+             : isGamePointFor(player) ? new GamePoint(players) //
+             : new NormalPoint(players);
     }
 
     private boolean isMatchPointFor(Player player) {
         return isSetPointFor(player) && //
-                (player.getSetsWon() + 1) >= gameType.setsCountToWin();
+                (player.getSetsWon() + 1) >= gameType.setsCountToWinTheMatch();
     }
 
     protected boolean isSetPointFor(Player player) {
