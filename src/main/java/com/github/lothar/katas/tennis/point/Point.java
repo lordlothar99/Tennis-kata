@@ -1,4 +1,4 @@
-package com.github.lothar.katas.tennis.calculator;
+package com.github.lothar.katas.tennis.point;
 
 import com.github.lothar.katas.tennis.Player;
 

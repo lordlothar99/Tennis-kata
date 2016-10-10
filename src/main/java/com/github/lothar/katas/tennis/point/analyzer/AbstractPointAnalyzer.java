@@ -1,9 +1,14 @@
-package com.github.lothar.katas.tennis.calculator;
+package com.github.lothar.katas.tennis.point.analyzer;
 
 import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET;
 
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
+import com.github.lothar.katas.tennis.point.GamePoint;
+import com.github.lothar.katas.tennis.point.MatchPoint;
+import com.github.lothar.katas.tennis.point.NormalPoint;
+import com.github.lothar.katas.tennis.point.Point;
+import com.github.lothar.katas.tennis.point.SetPoint;
 import com.github.lothar.katas.tennis.GameType;
 
 public abstract class AbstractPointAnalyzer implements PointAnalyzer {

@@ -2,11 +2,11 @@ package com.github.lothar.katas.tennis;
 
 import java.util.Optional;
 
-import com.github.lothar.katas.tennis.calculator.DefaultPointAnalyzer;
-import com.github.lothar.katas.tennis.calculator.Point;
-import com.github.lothar.katas.tennis.calculator.PointAnalyzer;
-import com.github.lothar.katas.tennis.calculator.TieBreakPointAnalyzer;
 import com.github.lothar.katas.tennis.exception.MatchIsOverException;
+import com.github.lothar.katas.tennis.point.Point;
+import com.github.lothar.katas.tennis.point.analyzer.DefaultPointAnalyzer;
+import com.github.lothar.katas.tennis.point.analyzer.PointAnalyzer;
+import com.github.lothar.katas.tennis.point.analyzer.TieBreakPointAnalyzer;
 import com.github.lothar.katas.tennis.printer.ScorePrinter;
 import com.github.lothar.katas.tennis.score.Score;
 

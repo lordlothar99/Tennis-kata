@@ -1,4 +1,4 @@
-package com.github.lothar.katas.tennis.calculator;
+package com.github.lothar.katas.tennis.point.analyzer;
 
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 
