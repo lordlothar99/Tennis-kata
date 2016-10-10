@@ -4,16 +4,16 @@ import static com.github.lothar.katas.tennis.TennisGame.GAMES_COUNT_TO_WIN_A_SET
 
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
-import com.github.lothar.katas.tennis.SetsToWin;
+import com.github.lothar.katas.tennis.GameType;
 
 public abstract class AbstractPointAnalyzer implements PointAnalyzer {
 
     protected Players players;
-    private SetsToWin setsToWin;
+    private GameType gameType;
 
-    public AbstractPointAnalyzer(Players players, SetsToWin setsToWin) {
+    public AbstractPointAnalyzer(Players players, GameType gameType) {
         this.players = players;
-        this.setsToWin = setsToWin;
+        this.gameType = gameType;
     }
 
     @Override
@@ -36,7 +36,7 @@ public abstract class AbstractPointAnalyzer implements PointAnalyzer {
 
     private boolean isMatchPointFor(Player player) {
         return isSetPointFor(player) && //
-                (player.getSetsWon() + 1) >= setsToWin.intValue();
+                (player.getSetsWon() + 1) >= gameType.setsCountToWin();
     }
 
     protected boolean isSetPointFor(Player player) {

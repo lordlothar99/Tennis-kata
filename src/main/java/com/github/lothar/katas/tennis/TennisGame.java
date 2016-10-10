@@ -14,11 +14,11 @@ public class TennisGame {
 
     public static final int GAMES_COUNT_TO_WIN_A_SET = 6;
     public static final int MIN_POINTS_TO_WIN_TIE_BREAK = 7;
-    private SetsToWin setsToWin;
+    private GameType gameType;
     private Players players;
 
-    public TennisGame(String player1Name, String player2Name, SetsToWin gameType) {
-        this.setsToWin = gameType;
+    public TennisGame(String player1Name, String player2Name, GameType gameType) {
+        this.gameType = gameType;
         players = new Players(player1Name, player2Name);
     }
 
@@ -33,9 +33,9 @@ public class TennisGame {
 
     private PointAnalyzer pointAnalyzer() {
         if (isTieBreak()) {
-            return new TieBreakPointAnalyzer(players, setsToWin);
+            return new TieBreakPointAnalyzer(players, gameType);
         } else {
-            return new DefaultPointAnalyzer(players, setsToWin);
+            return new DefaultPointAnalyzer(players, gameType);
         }
     }
 

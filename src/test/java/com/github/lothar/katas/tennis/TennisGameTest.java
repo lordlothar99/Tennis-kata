@@ -1,7 +1,7 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.SetsToWin.THREE;
-import static com.github.lothar.katas.tennis.SetsToWin.TWO;
+import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
+import static com.github.lothar.katas.tennis.GameType.TWO_SETS;
 import static com.github.lothar.katas.tennis.score.NormalScore.ADVANTAGE;
 import static com.github.lothar.katas.tennis.score.NormalScore.FIFTEEN;
 import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
@@ -23,7 +23,7 @@ public abstract class TennisGameTest {
 
     public static class MatchInTwoSets extends TennisGameTest {
         public MatchInTwoSets() {
-            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO_SETS);
         }
 
         @Test
@@ -229,7 +229,7 @@ public abstract class TennisGameTest {
 
     public static class MatchInThreeSets extends TennisGameTest {
         public MatchInThreeSets() {
-            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE_SETS);
         }
 
         @Test
@@ -360,7 +360,7 @@ public abstract class TennisGameTest {
 
     public static class TwoGamesOfDifference extends TennisGameTest {
         public TwoGamesOfDifference() {
-            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE_SETS);
         }
 
         @Test
@@ -410,7 +410,7 @@ public abstract class TennisGameTest {
 
     public static class TieBreak extends TennisGameTest {
         public TieBreak() {
-            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO);
+            tennisGame = new TennisGame(johnMcEnroe, ivanLendl, TWO_SETS);
         }
 
         @Test

@@ -1,12 +1,12 @@
 package com.github.lothar.katas.tennis;
 
-import static com.github.lothar.katas.tennis.SetsToWin.THREE;
+import static com.github.lothar.katas.tennis.GameType.THREE_SETS;
 
 public class TennisGameIT {
 
     private String johnMcEnroe = "John McEnroe";
     private String ivanLendl = "Ivan Lendl";
-    private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE);
+    private TennisGame tennisGame = new TennisGame(johnMcEnroe, ivanLendl, THREE_SETS);
 
     // @Test
     // public void whole_match_test() {

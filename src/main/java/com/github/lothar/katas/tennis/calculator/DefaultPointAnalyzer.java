@@ -4,12 +4,12 @@ import static com.github.lothar.katas.tennis.score.NormalScore.FOURTY;
 
 import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
-import com.github.lothar.katas.tennis.SetsToWin;
+import com.github.lothar.katas.tennis.GameType;
 
 public class DefaultPointAnalyzer extends AbstractPointAnalyzer {
 
-    public DefaultPointAnalyzer(Players players, SetsToWin setsToWin) {
-        super(players, setsToWin);
+    public DefaultPointAnalyzer(Players players, GameType gameType) {
+        super(players, gameType);
     }
 
     protected boolean isSetPointFor(Player player) {

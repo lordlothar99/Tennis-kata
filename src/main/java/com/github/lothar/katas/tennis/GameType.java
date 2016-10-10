@@ -1,17 +1,17 @@
 package com.github.lothar.katas.tennis;
 
-public enum SetsToWin {
+public enum GameType {
 
-    TWO(2), //
-    THREE(3);
+    TWO_SETS(2), //
+    THREE_SETS(3);
 
     private int value;
 
-    private SetsToWin(int value) {
+    private GameType(int value) {
         this.value = value;
     }
 
-    public int intValue() {
+    public int setsCountToWin() {
         return value;
     }
 }
