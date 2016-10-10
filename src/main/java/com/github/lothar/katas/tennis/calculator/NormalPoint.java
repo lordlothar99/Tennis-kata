@@ -13,16 +13,12 @@ public class NormalPoint extends AbstractPoint {
 
     @Override
     public void wonBy(Player player) {
-        Player opponent = opponent(player);
+        Player opponent = players.opponent(player);
         if (opponent.hasAdvantage()) {
             opponent.setScore(FOURTY);
         } else {
             player.incrementScore();
         }
-    }
-
-    private Player opponent(Player player) {
-        return players.opponent(player);
     }
 
 }
