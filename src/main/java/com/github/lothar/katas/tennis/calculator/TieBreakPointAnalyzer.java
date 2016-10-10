@@ -7,9 +7,9 @@ import com.github.lothar.katas.tennis.Players;
 import com.github.lothar.katas.tennis.SetsToWin;
 import com.github.lothar.katas.tennis.score.TieBreakScore;
 
-public class TieBreakScoreCalculator extends AbstractCalculator {
+public class TieBreakPointAnalyzer extends AbstractPointAnalyzer {
 
-    public TieBreakScoreCalculator(Players players, SetsToWin setsToWin) {
+    public TieBreakPointAnalyzer(Players players, SetsToWin setsToWin) {
         super(players, setsToWin);
     }
 

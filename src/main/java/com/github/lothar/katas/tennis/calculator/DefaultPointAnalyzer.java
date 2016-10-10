@@ -6,9 +6,9 @@ import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
 import com.github.lothar.katas.tennis.SetsToWin;
 
-public class NormalScoreCalculator extends AbstractCalculator {
+public class DefaultPointAnalyzer extends AbstractPointAnalyzer {
 
-    public NormalScoreCalculator(Players players, SetsToWin setsToWin) {
+    public DefaultPointAnalyzer(Players players, SetsToWin setsToWin) {
         super(players, setsToWin);
     }
 

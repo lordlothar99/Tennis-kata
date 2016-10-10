@@ -6,23 +6,18 @@ import com.github.lothar.katas.tennis.Player;
 import com.github.lothar.katas.tennis.Players;
 import com.github.lothar.katas.tennis.SetsToWin;
 
-public abstract class AbstractCalculator implements ScoreCalculator {
+public abstract class AbstractPointAnalyzer implements PointAnalyzer {
 
     protected Players players;
     private SetsToWin setsToWin;
 
-    public AbstractCalculator(Players players, SetsToWin setsToWin) {
+    public AbstractPointAnalyzer(Players players, SetsToWin setsToWin) {
         this.players = players;
         this.setsToWin = setsToWin;
     }
 
     @Override
-    public void pointWonBy(Player player) {
-        Point point = pointFor(player);
-        point.wonBy(player);
-    }
-
-    private Point pointFor(Player player) {
+    public Point pointFor(Player player) {
         Point point;
         if (isMatchPointFor(player)) {
             point = new MatchPoint(players);

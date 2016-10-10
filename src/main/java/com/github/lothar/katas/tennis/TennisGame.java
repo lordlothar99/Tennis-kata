@@ -2,9 +2,10 @@ package com.github.lothar.katas.tennis;
 
 import java.util.Optional;
 
-import com.github.lothar.katas.tennis.calculator.NormalScoreCalculator;
-import com.github.lothar.katas.tennis.calculator.ScoreCalculator;
-import com.github.lothar.katas.tennis.calculator.TieBreakScoreCalculator;
+import com.github.lothar.katas.tennis.calculator.DefaultPointAnalyzer;
+import com.github.lothar.katas.tennis.calculator.Point;
+import com.github.lothar.katas.tennis.calculator.PointAnalyzer;
+import com.github.lothar.katas.tennis.calculator.TieBreakPointAnalyzer;
 import com.github.lothar.katas.tennis.exception.MatchIsOverException;
 import com.github.lothar.katas.tennis.printer.ScorePrinter;
 import com.github.lothar.katas.tennis.score.Score;
@@ -25,14 +26,16 @@ public class TennisGame {
         if (isMatchOver()) {
             throw new MatchIsOverException();
         }
-        scoreCalculator().pointWonBy(getPlayer(playerName));
+        Player player = getPlayer(playerName);
+        Point point = pointAnalyzer().pointFor(player);
+        point.wonBy(player);
     }
 
-    private ScoreCalculator scoreCalculator() {
+    private PointAnalyzer pointAnalyzer() {
         if (isTieBreak()) {
-            return new TieBreakScoreCalculator(players, setsToWin);
+            return new TieBreakPointAnalyzer(players, setsToWin);
         } else {
-            return new NormalScoreCalculator(players, setsToWin);
+            return new DefaultPointAnalyzer(players, setsToWin);
         }
     }
 
