@@ -1,6 +1,6 @@
 package com.github.lothar.katas.tennis.score;
 
-public interface Score {
+public interface Score<T extends Score<?>> extends Comparable<T> {
 
-    Score next();
+    T next();
 }

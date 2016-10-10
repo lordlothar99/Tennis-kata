@@ -39,7 +39,7 @@ public class TennisGame {
         }
     }
 
-    public Score getScore(String playerName) {
+    public Score<?> getScore(String playerName) {
         return getPlayer(playerName).getScore();
     }
 

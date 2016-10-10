@@ -11,7 +11,7 @@ import com.github.lothar.katas.tennis.score.TieBreakScore;
 
 public class Player {
 
-    private Score score = ZERO;
+    private Score<?> score = ZERO;
     private Stack<Integer> gamesWonBySet = new Stack<>();
     private int setsWon;
     private String name;
@@ -26,8 +26,9 @@ public class Player {
         return name;
     }
 
-    public Score getScore() {
-        return score;
+    @SuppressWarnings("unchecked")
+    public <T extends Score<T>> T getScore() {
+        return (T) score;
     }
 
     public void incrementScore() {
@@ -38,7 +39,7 @@ public class Player {
         score = ZERO;
     }
 
-    public void setScore(Score score) {
+    public void setScore(Score<?> score) {
         this.score = score;
     }
 

@@ -1,6 +1,6 @@
 package com.github.lothar.katas.tennis.score;
 
-public enum NormalScore implements Score {
+public enum NormalScore implements Score<NormalScore> {
     ZERO("0") {
         @Override
         public NormalScore next() {
