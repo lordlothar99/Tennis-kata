@@ -17,19 +17,26 @@ public abstract class AbstractCalculator implements ScoreCalculator {
     }
 
     @Override
-    public void playerScores(Player player) {
+    public void pointWonBy(Player player) {
+        Point point = pointFor(player);
+        point.wonBy(player);
+    }
+
+    private Point pointFor(Player player) {
+        Point point;
         if (isMatchPointFor(player)) {
-            winsTheMatch(player);
+            point = new MatchPoint(players);
 
         } else if (isSetPointFor(player)) {
-            winsTheSet(player);
+            point = new SetPoint(players);
 
         } else if (isGamePointFor(player)) {
-            winsTheGame(player);
+            point = new GamePoint(players);
 
         } else {
-            winsNormalPoint(player);
+            point = new NormalPoint(players);
         }
+        return point;
     }
 
     private boolean isMatchPointFor(Player player) {
@@ -37,39 +44,12 @@ public abstract class AbstractCalculator implements ScoreCalculator {
                 (player.getSetsWon() + 1) >= setsToWin.intValue();
     }
 
-    private void winsTheMatch(Player player) {
-        player.incrementGamesWon();
-        player.incrementSetWon();
-        player.setWinner();
-        players.resetScore();
-    }
-
     protected boolean isSetPointFor(Player player) {
         return isGamePointFor(player) //
                 && player.getGamesWon() + 1 >= GAMES_COUNT_TO_WIN_A_SET;
     }
 
-    private void winsTheSet(Player player) {
-        player.incrementGamesWon();
-        player.incrementSetWon();
-        players.setupNewSet();
-        players.resetScore();
-    }
-
     protected abstract boolean isGamePointFor(Player player);
-
-    private void winsTheGame(Player player) {
-        player.incrementGamesWon();
-        if (players.areInTieBreak()) {
-            players.setupTieBreak();
-        } else {
-            players.resetScore();
-        }
-    }
-
-    protected void winsNormalPoint(Player player) {
-        player.incrementScore();
-    }
 
     protected Player opponent(Player player) {
         return players.opponent(player);

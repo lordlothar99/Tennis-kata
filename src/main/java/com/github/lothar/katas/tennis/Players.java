@@ -64,5 +64,6 @@ public class Players {
 
     public void setupNewSet() {
         stream().forEach(Player::setupNewSet);
+        resetScore();
     }
 }

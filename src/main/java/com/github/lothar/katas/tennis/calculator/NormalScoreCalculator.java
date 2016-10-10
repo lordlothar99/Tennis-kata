@@ -21,16 +21,6 @@ public class NormalScoreCalculator extends AbstractCalculator {
         Player opponent = opponent(player);
         return player.hasAdvantage() //
                 || FOURTY.equals(player.getScore()) //
-                        && !opponent.hasAdvantage()
-                        && !FOURTY.equals(opponent.getScore());
-    }
-
-    protected void winsNormalPoint(Player player) {
-        Player opponent = opponent(player);
-        if (opponent.hasAdvantage()) {
-            opponent.setScore(FOURTY);
-        } else {
-            super.winsNormalPoint(player);
-        }
+                        && !opponent.hasAdvantage() && !FOURTY.equals(opponent.getScore());
     }
 }

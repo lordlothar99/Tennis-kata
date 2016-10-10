@@ -25,7 +25,7 @@ public class TennisGame {
         if (isMatchOver()) {
             throw new MatchIsOverException();
         }
-        scoreCalculator().playerScores(getPlayer(playerName));
+        scoreCalculator().pointWonBy(getPlayer(playerName));
     }
 
     private ScoreCalculator scoreCalculator() {
