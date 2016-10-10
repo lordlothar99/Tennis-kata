@@ -14,11 +14,11 @@ public class TieBreakPointAnalyzer extends AbstractPointAnalyzer {
     }
 
     protected boolean isGamePointFor(Player player) {
-        int tieBreakScore = tieBreakScore(player);
-        int opponentScore = tieBreakScore(opponent(player));
+        int playerScore = tieBreakScore(player);
+        int opponentScore = tieBreakScore(players.opponent(player));
 
-        return (tieBreakScore + 1) >= MIN_POINTS_TO_WIN_TIE_BREAK
-                && tieBreakScore - opponentScore > 0;
+        return (playerScore + 1) >= MIN_POINTS_TO_WIN_TIE_BREAK //
+                && playerScore > opponentScore;
     }
 
     private int tieBreakScore(Player player) {

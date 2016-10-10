@@ -46,8 +46,4 @@ public abstract class AbstractPointAnalyzer implements PointAnalyzer {
 
     protected abstract boolean isGamePointFor(Player player);
 
-    protected Player opponent(Player player) {
-        return players.opponent(player);
-    }
-
 }

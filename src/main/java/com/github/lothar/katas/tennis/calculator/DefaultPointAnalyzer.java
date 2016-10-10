@@ -14,11 +14,11 @@ public class DefaultPointAnalyzer extends AbstractPointAnalyzer {
 
     protected boolean isSetPointFor(Player player) {
         return super.isSetPointFor(player) //
-                && player.getGamesWon() > opponent(player).getGamesWon(); //
+                && player.getGamesWon() > players.opponent(player).getGamesWon(); //
     }
 
     protected boolean isGamePointFor(Player player) {
-        Player opponent = opponent(player);
+        Player opponent = players.opponent(player);
         return player.hasAdvantage() //
                 || FOURTY.equals(player.getScore()) //
                         && !opponent.hasAdvantage() && !FOURTY.equals(opponent.getScore());
