@@ -30,13 +30,13 @@ public abstract class AbstractPointAnalyzer implements PointAnalyzer {
     }
 
     private boolean isMatchPointFor(Player player) {
-        return isSetPointFor(player) && //
-                (player.getSetsWon() + 1) >= gameType.setsCountToWinTheMatch();
+        return isSetPointFor(player) //
+                && (player.getSetsWon() + 1) >= gameType.setsCountToWinTheMatch();
     }
 
     protected boolean isSetPointFor(Player player) {
         return isGamePointFor(player) //
-                && player.getGamesWon() + 1 >= GAMES_COUNT_TO_WIN_A_SET;
+                && (player.getGamesWon() + 1) >= GAMES_COUNT_TO_WIN_A_SET;
     }
 
     protected abstract boolean isGamePointFor(Player player);
