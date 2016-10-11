@@ -13,7 +13,7 @@ public class MatchPoint extends AbstractPoint {
         player.incrementGamesWon();
         player.incrementSetWon();
         player.setWinner();
-        players.resetScore();
+        players.resetScores();
     }
 
 }

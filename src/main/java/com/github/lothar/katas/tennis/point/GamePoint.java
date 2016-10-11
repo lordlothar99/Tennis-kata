@@ -14,7 +14,7 @@ public class GamePoint extends AbstractPoint {
         if (players.areInTieBreak()) {
             players.setupTieBreak();
         } else {
-            players.resetScore();
+            players.setupNewGame();
         }
     }
 }

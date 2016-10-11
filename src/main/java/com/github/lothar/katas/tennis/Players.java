@@ -58,12 +58,16 @@ public class Players {
         stream().forEach(Player::setupTieBreak);
     }
 
-    public void resetScore() {
+    public void resetScores() {
         stream().forEach(Player::resetScore);
     }
 
     public void setupNewSet() {
         stream().forEach(Player::setupNewSet);
-        resetScore();
+        resetScores();
+    }
+
+    public void setupNewGame() {
+        resetScores();
     }
 }
